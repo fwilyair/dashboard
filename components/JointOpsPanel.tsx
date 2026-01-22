@@ -22,12 +22,12 @@ export const JointOpsPanel: React.FC<JointOpsPanelProps> = ({ data }) => {
         <div className="grid grid-cols-[auto_auto] gap-x-2 gap-y-2 justify-center items-baseline">
           {/* Row 1: Numbers */}
           <span className={`text-8xl lg:text-9xl font-black tech-font tracking-tighter drop-shadow-pop leading-none text-right ${isDark ? 'text-sky-300' : 'text-sky-600'}`}>
-            {data.totalExecuted.toLocaleString()}
+            {data.totalExecuted}
           </span>
           <div className="flex items-baseline">
             <span className={`text-6xl lg:text-7xl font-bold tech-font tracking-tight leading-none ${isDark ? 'text-white' : 'text-slate-400'}`}>/</span>
             <span className={`text-6xl lg:text-7xl font-bold tech-font tracking-tight leading-none ${isDark ? 'text-white' : 'text-slate-400'}`}>
-              {data.totalPlanned.toLocaleString()}
+              {data.totalPlanned}
             </span>
           </div>
           {/* Row 2: Labels - aligned right under their numbers */}
@@ -42,14 +42,14 @@ export const JointOpsPanel: React.FC<JointOpsPanelProps> = ({ data }) => {
           {data.gaps.map((gap, index) => (
             <div
               key={index}
-              className={`flex items-center justify-between group border-b py-5 last:border-0 transition-colors rounded-lg px-2 ${isDark
+              className={`flex items-center justify-between border-b py-5 last:border-0 rounded-lg px-2 ${isDark
                 ? 'border-white/5'
                 : 'border-slate-200/60'
                 }`}
             >
               {/* Label Section - aligned with numbers baseline */}
               <div className="flex-shrink-0 flex items-end">
-                <span className={`text-5xl font-black tracking-tight transition-colors leading-none ${isDark
+                <span className={`text-5xl font-black tracking-tight leading-none ${isDark
                   ? 'text-white drop-shadow-md'
                   : 'text-slate-600 drop-shadow-soft'
                   }`}>
@@ -78,6 +78,6 @@ export const JointOpsPanel: React.FC<JointOpsPanelProps> = ({ data }) => {
           ))}
         </div>
       </div>
-    </section>
+    </section >
   );
 };

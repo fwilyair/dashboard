@@ -30,9 +30,9 @@ export const SmallStatCard: React.FC<SmallStatCardProps> = ({ data, colorTheme, 
   const isRight = align === 'right';
 
   return (
-    <div className={`flex flex-col justify-between group ${isRight ? 'items-end' : 'items-start'}`}>
+    <div className={`flex flex-col justify-between ${isRight ? 'items-end' : 'items-start'}`}>
       <div className={`flex items-end mb-3 ${isRight ? 'justify-end' : 'justify-start'} w-full`}>
-        <span className={`text-3xl font-bold tracking-tight transition-colors ${isDark
+        <span className={`text-3xl font-bold tracking-tight ${isDark
           ? 'text-white'
           : 'text-slate-600'
           }`}>{data.label}</span>
@@ -47,7 +47,7 @@ export const SmallStatCard: React.FC<SmallStatCardProps> = ({ data, colorTheme, 
       </div>
 
       {/* Increased height to h-3 for bolder look */}
-      <div className={`w-full h-3 rounded-full overflow-hidden ${isDark ? 'bg-white/10' : 'bg-slate-200/60'}`}>
+      <div className={`w-full h-3 rounded-full overflow-hidden ${isDark ? 'bg-slate-600/50' : 'bg-slate-300'}`}>
         <div
           className={`h-3 rounded-full transition-all duration-1000 ease-out ${isDark
             ? `${currentTheme.barDark} shadow-[0_0_10px_currentColor]`

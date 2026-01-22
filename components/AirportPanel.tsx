@@ -22,9 +22,10 @@ export const AirportPanel: React.FC<AirportPanelProps> = ({ data, children }) =>
   };
 
   return (
-    <section className="col-span-12 lg:col-span-4 flex flex-col h-full min-h-0 px-6 pb-4 pt-16 justify-between relative group">
+    <section className="col-span-12 lg:col-span-4 flex flex-col h-full min-h-0 px-6 pb-4 pt-16 justify-between relative">
       <div className="flex flex-col gap-6 flex-shrink-0">
-        <div className={`flex items-end border-b pb-4 ${isAirportA ? 'justify-end' : 'justify-between'} ${isDark ? 'border-white/10' : 'border-slate-200/60'}`}>
+        <div className={`flex items-center gap-4 border-b pb-4 ${isAirportA ? 'justify-end' : 'justify-start'} ${isDark ? 'border-white/10' : 'border-slate-200/60'}`}>
+          <div className={`order-first w-2 h-10 rounded-full ${isTeal ? 'bg-emerald-500' : 'bg-sky-500'}`}></div>
           <div className={isAirportA ? 'text-right' : 'text-left'}>
             <h2 className={`text-[48px] font-black tracking-tight ${isDark ? 'text-white drop-shadow-md' : 'text-slate-700 drop-shadow-soft'}`}>{data.name}</h2> {/* Explicit 48px */}
           </div>
@@ -100,7 +101,7 @@ export const AirportAFooter: React.FC = () => {
               <span className={`text-5xl font-black tech-font ${isDark ? agent.colorDark : agent.colorLight} ${isDark ? 'drop-shadow-md' : 'drop-shadow-soft'} leading-none tracking-tight`}>{agent.val}</span>
               <span className={`text-lg tech-font font-bold ${isDark ? 'text-white' : 'text-slate-400'}`}>/ {agent.total}</span>
             </div>
-            <div className={`h-2 w-full rounded-full overflow-hidden ${isDark ? 'bg-slate-800' : 'bg-slate-200/60'}`}>
+            <div className={`h-2 w-full rounded-full overflow-hidden ${isDark ? 'bg-slate-600/50' : 'bg-slate-300'}`}>
               <div
                 className={`h-full ${isDark ? agent.colorDark : agent.colorLight} bg-current ${isDark ? 'opacity-80 shadow-[0_0_8px_currentColor]' : 'opacity-70'} rounded-full`}
                 style={{ width: `${(agent.val / agent.total) * 100}%` }}

@@ -42,13 +42,13 @@ const MetricValueCell: React.FC<{
         <div className="flex flex-col items-center justify-end w-full px-2">
             {/* Value Number */}
             <span
-                className={`text-4xl lg:text-5xl font-black tech-font mb-1 leading-none ${textColorClass} ${isDark ? 'drop-shadow-md' : 'drop-shadow-soft'} transition-colors duration-300`}
+                className={`text-4xl lg:text-5xl font-black tech-font mb-1 leading-none ${textColorClass} ${isDark ? 'drop-shadow-md' : 'drop-shadow-soft'}`}
             >
                 {value.toFixed(1)}<span className="text-2xl ml-[1px]">%</span>
             </span>
 
             {/* Progress Bar */}
-            <div className={`w-full h-1.5 rounded-full overflow-hidden ${isDark ? 'bg-white/10' : 'bg-slate-200'}`}>
+            <div className={`w-full h-1.5 rounded-full overflow-hidden ${isDark ? 'bg-slate-600/50' : 'bg-slate-300'}`}>
                 <div
                     className={`h-full rounded-full bg-gradient-to-r ${barGradient} ${isDark ? 'shadow-[0_0_8px_currentColor]' : ''}`}
                     style={{ width: `${value}%` }}
@@ -88,7 +88,7 @@ export const OperationsPanel: React.FC<OperationsPanelProps> = ({ data }) => {
 
                     {/* A 机场 Header */}
                     <div className="flex-[4] flex flex-col px-6">
-                        <h3 className={`text-[48px] font-black tracking-tight text-left mb-10 ${isDark ? 'text-white drop-shadow-lg' : 'text-slate-800'}`}> {/* Explicit 48px */}
+                        <h3 className={`text-[48px] font-black tracking-tight text-left mb-10 ${isDark ? 'text-white drop-shadow-lg' : 'text-slate-800'}`}>
                             {data.airportA.name}
                         </h3>
                         <div className="flex justify-around gap-4">
@@ -108,7 +108,7 @@ export const OperationsPanel: React.FC<OperationsPanelProps> = ({ data }) => {
 
                     {/* B 机场 Header */}
                     <div className="flex-[1.5] flex flex-col px-6">
-                        <h3 className={`text-[48px] font-black tracking-tight text-left mb-10 ${isDark ? 'text-white drop-shadow-lg' : 'text-slate-800'}`}> {/* Explicit 48px */}
+                        <h3 className={`text-[48px] font-black tracking-tight text-left mb-10 ${isDark ? 'text-white drop-shadow-lg' : 'text-slate-800'}`}>
                             {data.airportB.name}
                         </h3>
                         <div className="flex justify-center gap-4">
@@ -135,7 +135,7 @@ export const OperationsPanel: React.FC<OperationsPanelProps> = ({ data }) => {
                         const rowMin = Math.min(...rowVals);
 
                         return (
-                            <div key={key} className="flex-1 flex items-end border-b border-white/5 last:border-0 transition-colors duration-300 pb-2">
+                            <div key={key} className="flex-1 flex items-end border-b border-white/5 last:border-0 pb-2">
 
                                 {/* Label Column - Changed to White */}
                                 <div className="w-[320px] flex-shrink-0 pl-4 mb-[2px]">
