@@ -104,7 +104,7 @@ const MatrixCell: React.FC<{
             {/* Top Row: Actual (Left) + Target (Right) */}
             <div className="flex justify-between items-end mb-2">
                 {/* Left: Actual Complete */}
-                <div className="flex items-baseline gap-2 mb-1">
+                <div className="flex flex-col items-start gap-1 mb-1">
                     <span className={`text-5xl font-bold tech-font tracking-tight leading-none ${theme.primary}`}>
                         {formatted.val}
                     </span>
