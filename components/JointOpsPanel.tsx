@@ -18,23 +18,21 @@ export const JointOpsPanel: React.FC<JointOpsPanelProps> = ({ data }) => {
           <h2 className={`text-6xl font-black leading-none mb-2 tracking-wide ${isDark ? 'text-white' : 'text-slate-700'}`}>态势看板</h2>
         </div>
 
-        {/* Flex container with bottom alignment for numbers */}
-        <div className="flex justify-center items-end gap-4 w-full text-center">
-          <div className="flex flex-col gap-1 items-center">
-            <span className={`text-8xl lg:text-9xl font-black tech-font tracking-tighter drop-shadow-pop leading-none ${isDark ? 'text-sky-300' : 'text-sky-600'}`}>
-              {data.totalExecuted.toLocaleString()}
+        {/* Numbers and labels container - Grid layout */}
+        <div className="grid grid-cols-[auto_auto] gap-x-2 gap-y-2 justify-center items-baseline">
+          {/* Row 1: Numbers */}
+          <span className={`text-8xl lg:text-9xl font-black tech-font tracking-tighter drop-shadow-pop leading-none text-right ${isDark ? 'text-sky-300' : 'text-sky-600'}`}>
+            {data.totalExecuted.toLocaleString()}
+          </span>
+          <div className="flex items-baseline">
+            <span className={`text-6xl lg:text-7xl font-bold tech-font tracking-tight leading-none ${isDark ? 'text-white' : 'text-slate-400'}`}>/</span>
+            <span className={`text-6xl lg:text-7xl font-bold tech-font tracking-tight leading-none ${isDark ? 'text-white' : 'text-slate-400'}`}>
+              {data.totalPlanned.toLocaleString()}
             </span>
-            <span className={`text-sm font-bold uppercase tracking-widest mt-2 ${isDark ? 'text-sky-200/80' : 'text-sky-700/70'}`}>已执行总计</span>
           </div>
-          <div className="flex flex-col gap-1 items-center">
-            <div className="flex items-end gap-2">
-              <span className={`text-6xl lg:text-7xl font-bold tech-font tracking-tight leading-none ${isDark ? 'text-white' : 'text-slate-400'}`}>/</span>
-              <span className={`text-6xl lg:text-7xl font-bold tech-font tracking-tight leading-none ${isDark ? 'text-white' : 'text-slate-400'}`}>
-                {data.totalPlanned.toLocaleString()}
-              </span>
-            </div>
-            <span className={`text-sm font-bold uppercase tracking-widest mt-2 ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>总计划</span>
-          </div>
+          {/* Row 2: Labels - aligned right under their numbers */}
+          <span className={`text-sm font-bold uppercase tracking-widest text-right ${isDark ? 'text-sky-200/80' : 'text-sky-700/70'}`}>已执行总计</span>
+          <span className={`text-sm font-bold uppercase tracking-widest text-right ${isDark ? 'text-white' : 'text-slate-400'}`}>总计划</span>
         </div>
       </div>
 
@@ -45,45 +43,36 @@ export const JointOpsPanel: React.FC<JointOpsPanelProps> = ({ data }) => {
             <div
               key={index}
               className={`flex items-center justify-between group border-b py-5 last:border-0 transition-colors rounded-lg px-2 ${isDark
-                ? 'border-white/5 hover:bg-white/[0.02]'
-                : 'border-slate-200/60 hover:bg-white/40'
+                ? 'border-white/5'
+                : 'border-slate-200/60'
                 }`}
             >
-              {/* Label Section - Large Font 48px */}
-              <div className="flex-shrink-0">
-                <span className={`text-[48px] font-black tracking-tight transition-colors ${isDark
-                  ? 'text-white group-hover:text-sky-200 drop-shadow-md'
-                  : 'text-slate-600 group-hover:text-sky-700 drop-shadow-soft'
-                  }`}> {/* Explicit 48px */}
+              {/* Label Section - aligned with numbers baseline */}
+              <div className="flex-shrink-0 flex items-end">
+                <span className={`text-5xl font-black tracking-tight transition-colors leading-none ${isDark
+                  ? 'text-white drop-shadow-md'
+                  : 'text-slate-600 drop-shadow-soft'
+                  }`}>
                   {gap.label}
                 </span>
               </div>
 
-              {/* Horizontal Data Layout - Two Row Structure */}
-              <div className="flex flex-col items-end gap-1 flex-1">
-                {/* Row 1: Numbers aligned by baseline */}
-                <div className="flex items-baseline justify-end gap-10 w-full">
-                  {/* Executed / Planned Numbers */}
-                  <div className="flex items-baseline gap-2">
-                    <span className={`text-6xl font-black tech-font tracking-tighter drop-shadow-pop leading-none ${isDark ? 'text-sky-300' : 'text-sky-600'}`}>
-                      {gap.act}
-                    </span>
-                    <span className={`text-3xl font-bold tech-font leading-none ${isDark ? 'text-white' : 'text-slate-400'}`}>
-                      / {gap.plan}
-                    </span>
-                  </div>
-
-                  {/* Not Executed Number */}
-                  <span className={`text-[30px] font-bold tech-font leading-none opacity-90 min-w-[3.5rem] text-right ${isDark ? 'text-[#FB923C]' : 'text-orange-600'}`}>
-                    {Math.max(0, gap.plan - gap.act)}
+              {/* Horizontal Data Layout - Numbers only */}
+              <div className="flex items-baseline justify-end gap-10 flex-1">
+                {/* Executed / Planned Numbers */}
+                <div className="flex items-baseline gap-2">
+                  <span className={`text-6xl font-black tech-font tracking-tighter drop-shadow-pop leading-none ${isDark ? 'text-sky-300' : 'text-sky-600'}`}>
+                    {gap.act}
+                  </span>
+                  <span className={`text-3xl font-bold tech-font leading-none ${isDark ? 'text-white' : 'text-slate-400'}`}>
+                    / {gap.plan}
                   </span>
                 </div>
 
-                {/* Row 2: Labels */}
-                <div className="flex justify-end gap-10 w-full">
-                  <span className={`text-xs font-bold uppercase tracking-widest ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>已执行 / 计划</span>
-                  <span className={`text-xs font-bold uppercase tracking-widest min-w-[3.5rem] text-right ${isDark ? 'text-[#FB923C]' : 'text-orange-600/60'}`}>未执行</span>
-                </div>
+                {/* Not Executed Number */}
+                <span className={`text-[30px] font-bold tech-font leading-none opacity-90 min-w-[3.5rem] text-right ${isDark ? 'text-[#FB923C]' : 'text-orange-600'}`}>
+                  {Math.max(0, gap.plan - gap.act)}
+                </span>
               </div>
             </div>
           ))}

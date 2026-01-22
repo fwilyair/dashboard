@@ -33,8 +33,8 @@ export const SmallStatCard: React.FC<SmallStatCardProps> = ({ data, colorTheme, 
     <div className={`flex flex-col justify-between group ${isRight ? 'items-end' : 'items-start'}`}>
       <div className={`flex items-end mb-3 ${isRight ? 'justify-end' : 'justify-start'} w-full`}>
         <span className={`text-3xl font-bold tracking-tight transition-colors ${isDark
-          ? 'text-white group-hover:text-white/100'
-          : 'text-slate-600 group-hover:text-slate-700'
+          ? 'text-white'
+          : 'text-slate-600'
           }`}>{data.label}</span>
       </div>
 

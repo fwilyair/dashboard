@@ -135,7 +135,7 @@ export const OperationsPanel: React.FC<OperationsPanelProps> = ({ data }) => {
                         const rowMin = Math.min(...rowVals);
 
                         return (
-                            <div key={key} className="flex-1 flex items-end border-b border-white/5 last:border-0 hover:bg-white/5 transition-colors duration-300 pb-2">
+                            <div key={key} className="flex-1 flex items-end border-b border-white/5 last:border-0 transition-colors duration-300 pb-2">
 
                                 {/* Label Column - Changed to White */}
                                 <div className="w-[320px] flex-shrink-0 pl-4 mb-[2px]">

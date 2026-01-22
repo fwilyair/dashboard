@@ -43,11 +43,11 @@ const App: React.FC = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [nextPage, prevPage]);
 
-  // Auto carousel effect
-  useEffect(() => {
-    const timer = setInterval(nextPage, CAROUSEL_INTERVAL);
-    return () => clearInterval(timer);
-  }, [nextPage]);
+  // Auto carousel effect - DISABLED
+  // useEffect(() => {
+  //   const timer = setInterval(nextPage, CAROUSEL_INTERVAL);
+  //   return () => clearInterval(timer);
+  // }, [nextPage]);
 
   return (
     <div className={`h-screen w-screen flex flex-col relative overflow-hidden ${isDark ? 'text-white' : 'text-slate-700'}`}>

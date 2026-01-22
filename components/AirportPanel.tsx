@@ -92,13 +92,10 @@ export const AirportAFooter: React.FC = () => {
 
   return (
     <div className="pb-2">
-      <h3 className={`text-2xl font-black uppercase mb-6 tracking-wider ${isDark ? 'text-white drop-shadow-sm' : 'text-slate-700 drop-shadow-soft'}`}>
-        代理看板
-      </h3>
       <div className="grid grid-cols-3 gap-8">
         {agents.map((agent) => (
           <div key={agent.name} className="flex flex-col">
-            <span className={`text-sm font-bold mb-2 uppercase tracking-wide ${isDark ? 'text-slate-300' : 'text-slate-500'}`}>{agent.name}</span>
+            <span className={`text-2xl font-black mb-6 tracking-wider ${isDark ? 'text-white drop-shadow-sm' : 'text-slate-700 drop-shadow-soft'}`}>{agent.name}</span>
             <div className="flex items-baseline gap-2 mb-3">
               <span className={`text-5xl font-black tech-font ${isDark ? agent.colorDark : agent.colorLight} ${isDark ? 'drop-shadow-md' : 'drop-shadow-soft'} leading-none tracking-tight`}>{agent.val}</span>
               <span className={`text-lg tech-font font-bold ${isDark ? 'text-white' : 'text-slate-400'}`}>/ {agent.total}</span>
