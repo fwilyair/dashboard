@@ -31,18 +31,13 @@ export const AirportPanel: React.FC<AirportPanelProps> = ({ data, children }) =>
         </div>
 
         <div className="flex flex-col gap-2 py-2">
-          <span className={`text-base font-bold uppercase tracking-wider mb-2 ${isAirportA ? 'text-right' : 'text-left'} ${isDark ? 'text-slate-200' : 'text-slate-500'}`}>
-            今日总计
-          </span>
-
           <div className={`flex items-end gap-4 ${isAirportA ? 'justify-end' : 'justify-start'}`}>
             <span className={`text-8xl lg:text-9xl font-black tech-font ${themeClasses.executedText} leading-none tracking-tighter drop-shadow-pop`}>
               {data.totalFlights.executed}
             </span>
 
             <div className={`flex flex-col pb-3 items-end`}>
-              <span className={`text-sm font-bold uppercase tracking-widest mb-1 ${isDark ? 'text-slate-400 opacity-60' : 'text-slate-400 opacity-80'}`}>计划</span>
-              <span className={`text-4xl lg:text-5xl font-bold tech-font ${isDark ? 'text-white' : 'text-slate-400'}`}> {/* Plan to White */}
+              <span className={`text-4xl lg:text-5xl font-bold tech-font ${isDark ? 'text-white' : 'text-slate-400'}`}>
                 / {data.totalFlights.planned}
               </span>
             </div>
@@ -58,10 +53,10 @@ export const AirportPanel: React.FC<AirportPanelProps> = ({ data, children }) =>
       </div>
 
       <div className="grid grid-cols-2 gap-x-12 flex-1 content-start gap-y-12 py-12">
-        <SmallStatCard data={data.metrics.domPax} colorTheme={data.colorTheme} />
-        <SmallStatCard data={data.metrics.domCgo} colorTheme={data.colorTheme} />
-        <SmallStatCard data={data.metrics.intPax} colorTheme={data.colorTheme} />
-        <SmallStatCard data={data.metrics.intCgo} colorTheme={data.colorTheme} />
+        <SmallStatCard data={data.metrics.domPax} colorTheme={data.colorTheme} align={isAirportA ? 'right' : 'left'} />
+        <SmallStatCard data={data.metrics.domCgo} colorTheme={data.colorTheme} align={isAirportA ? 'right' : 'left'} />
+        <SmallStatCard data={data.metrics.intPax} colorTheme={data.colorTheme} align={isAirportA ? 'right' : 'left'} />
+        <SmallStatCard data={data.metrics.intCgo} colorTheme={data.colorTheme} align={isAirportA ? 'right' : 'left'} />
       </div>
 
       <div className={`mt-auto flex-shrink-0 pt-8 border-t ${children ? (isDark ? 'border-white/10' : 'border-slate-200/60') : 'border-transparent'}`}>
@@ -106,7 +101,7 @@ export const AirportAFooter: React.FC = () => {
             <span className={`text-sm font-bold mb-2 uppercase tracking-wide ${isDark ? 'text-slate-300' : 'text-slate-500'}`}>{agent.name}</span>
             <div className="flex items-baseline gap-2 mb-3">
               <span className={`text-5xl font-black tech-font ${isDark ? agent.colorDark : agent.colorLight} ${isDark ? 'drop-shadow-md' : 'drop-shadow-soft'} leading-none tracking-tight`}>{agent.val}</span>
-              <span className="text-lg text-slate-400 tech-font font-bold">/ {agent.total}</span>
+              <span className={`text-lg tech-font font-bold ${isDark ? 'text-white' : 'text-slate-400'}`}>/ {agent.total}</span>
             </div>
             <div className={`h-2 w-full rounded-full overflow-hidden ${isDark ? 'bg-slate-800' : 'bg-slate-200/60'}`}>
               <div

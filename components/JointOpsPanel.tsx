@@ -28,8 +28,8 @@ export const JointOpsPanel: React.FC<JointOpsPanelProps> = ({ data }) => {
           </div>
           <div className="flex flex-col gap-1 items-center">
             <div className="flex items-end gap-2">
-              <span className="text-6xl lg:text-7xl font-bold tech-font text-slate-400 tracking-tight leading-none">/</span>
-              <span className={`text-6xl lg:text-7xl font-bold tech-font tracking-tight leading-none ${isDark ? 'text-white' : 'text-slate-400'}`}> {/* Plan to White */}
+              <span className={`text-6xl lg:text-7xl font-bold tech-font tracking-tight leading-none ${isDark ? 'text-white' : 'text-slate-400'}`}>/</span>
+              <span className={`text-6xl lg:text-7xl font-bold tech-font tracking-tight leading-none ${isDark ? 'text-white' : 'text-slate-400'}`}>
                 {data.totalPlanned.toLocaleString()}
               </span>
             </div>

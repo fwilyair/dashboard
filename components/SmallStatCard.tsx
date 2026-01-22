@@ -5,9 +5,10 @@ import { useTheme } from '../ThemeContext';
 interface SmallStatCardProps {
   data: Metric;
   colorTheme: 'teal' | 'indigo';
+  align?: 'left' | 'right';
 }
 
-export const SmallStatCard: React.FC<SmallStatCardProps> = ({ data, colorTheme }) => {
+export const SmallStatCard: React.FC<SmallStatCardProps> = ({ data, colorTheme, align = 'left' }) => {
   const { isDark } = useTheme();
 
   const themeColors = {
@@ -26,22 +27,23 @@ export const SmallStatCard: React.FC<SmallStatCardProps> = ({ data, colorTheme }
   };
 
   const currentTheme = themeColors[colorTheme];
+  const isRight = align === 'right';
 
   return (
-    <div className="flex flex-col justify-between group">
-      <div className="flex justify-between items-end mb-3">
+    <div className={`flex flex-col justify-between group ${isRight ? 'items-end' : 'items-start'}`}>
+      <div className={`flex items-end mb-3 ${isRight ? 'justify-end' : 'justify-start'} w-full`}>
         <span className={`text-3xl font-bold tracking-tight transition-colors ${isDark
           ? 'text-white group-hover:text-white/100'
           : 'text-slate-600 group-hover:text-slate-700'
           }`}>{data.label}</span>
       </div>
 
-      <div className="flex items-baseline gap-2 mb-2">
+      <div className={`flex items-baseline gap-2 mb-2 ${isRight ? 'justify-end' : 'justify-start'} w-full`}>
         <span className={`text-5xl lg:text-6xl font-black tech-font drop-shadow-pop tracking-tight leading-none ${isDark ? currentTheme.textDark : currentTheme.textLight
           }`}>
           {data.executed}
         </span>
-        <span className={`text-lg font-bold tech-font ${isDark ? 'text-white' : 'text-slate-400'}`}>/ {data.planned}</span> {/* Plan to White */}
+        <span className={`text-lg font-bold tech-font ${isDark ? 'text-white' : 'text-slate-400'}`}>/ {data.planned}</span>
       </div>
 
       {/* Increased height to h-3 for bolder look */}
