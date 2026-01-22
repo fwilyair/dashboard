@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>双机场指挥看板</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            // Light theme - Apple Big Sur inspired
+            "bg-main": "#f8fafc", // Soft off-white
+            "card-glass": "rgba(255, 255, 255, 0.6)",
+            "text-primary": "#334155", // Slate 700 - muted dark
+            "text-secondary": "#64748b", // Slate 500
+            "text-muted": "#94a3b8", // Slate 400
+            "data-executed": "#334155",
+            "data-planned": "#94a3b8",
+            // Muted accent colors - lower saturation
+            "accent-teal": "#0d9488", // Teal 600 - more muted
+            "accent-teal-soft": "#5eead4", // Teal 300
+            "accent-teal-dim": "rgba(13, 148, 136, 0.1)",
+            "accent-indigo": "#6366f1", // Indigo 500 - slightly muted
+            "accent-indigo-soft": "#a5b4fc", // Indigo 300
+            "accent-indigo-dim": "rgba(99, 102, 241, 0.1)",
+            "accent-rose": "#e11d48", // Rose 600
+            "accent-orange": "#ea580c", // Orange 600 - muted
+            "accent-amber": "#d97706", // Amber 600
+            "accent-emerald": "#059669", // Emerald 600
+            "accent-sky": "#0284c7", // Sky 600
+          },
+          fontFamily: {
+            sans: ["Manrope", "Noto Sans SC", "sans-serif"],
+            mono: ["Space Grotesk", "monospace"],
+            tech: ["Rajdhani", "sans-serif"],
+          },
+          dropShadow: {
+            'glow': '0 0 15px rgba(99, 102, 241, 0.2)',
+            'soft': '0 4px 6px rgba(0, 0, 0, 0.05)',
+            'pop': '0 2px 4px rgba(0, 0, 0, 0.08)',
+          },
+          boxShadow: {
+            'glass': '0 8px 32px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.8)',
+            'card': '0 4px 24px rgba(0, 0, 0, 0.04)',
+          },
+          animation: {
+            'breathe': 'breathe 3s ease-in-out infinite',
+          }
+        },
+      },
+    };
+  </script>
+  <style>
+    body {
+      font-family: 'Manrope', 'Noto Sans SC', sans-serif;
+    }
+
+    .tech-font {
+      font-family: 'Rajdhani', sans-serif;
+      font-variant-numeric: tabular-nums;
+      font-weight: 700;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(226, 232, 240, 0.5);
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    /* Big Sur Style Floating Animations */
+    @keyframes float1 {
+
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      25% {
+        transform: translate(5%, 10%) scale(1.05);
+      }
+
+      50% {
+        transform: translate(-5%, 5%) scale(0.95);
+      }
+
+      75% {
+        transform: translate(8%, -5%) scale(1.02);
+      }
+    }
+
+    @keyframes float2 {
+
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      25% {
+        transform: translate(-8%, 5%) scale(0.98);
+      }
+
+      50% {
+        transform: translate(5%, -8%) scale(1.04);
+      }
+
+      75% {
+        transform: translate(-3%, 10%) scale(0.96);
+      }
+    }
+
+    @keyframes float3 {
+
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      25% {
+        transform: translate(10%, -5%) scale(1.03);
+      }
+
+      50% {
+        transform: translate(-8%, 8%) scale(0.97);
+      }
+
+      75% {
+        transform: translate(5%, 5%) scale(1.01);
+      }
+    }
+
+    @keyframes float4 {
+
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      25% {
+        transform: translate(-5%, -8%) scale(0.99);
+      }
+
+      50% {
+        transform: translate(10%, 5%) scale(1.02);
+      }
+
+      75% {
+        transform: translate(-8%, -3%) scale(0.98);
+      }
+    }
+
+    @keyframes floatCenter {
+
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+      }
+
+      33% {
+        transform: translate(3%, -3%) scale(1.03) rotate(2deg);
+      }
+
+      66% {
+        transform: translate(-3%, 3%) scale(0.97) rotate(-2deg);
+      }
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: 200% 0;
+      }
+
+      100% {
+        background-position: -200% 0;
+      }
+    }
+
+    @keyframes breathe {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.85;
+      }
+    }
+
+    /* Glass morphism helper */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+  </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0"
+  }
+}
+</script>
+  <link rel="stylesheet" href="/index.css">
+</head>
+
+<body class="bg-transparent text-slate-700 overflow-hidden selection:bg-indigo-200 selection:text-slate-800">
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
+</html>

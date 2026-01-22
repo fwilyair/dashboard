@@ -1,0 +1,5 @@
+{
+  "name": "Dual Airport Command Dashboard",
+  "description": "A high-fidelity, light-mode command center dashboard for monitoring dual airport operations, featuring real-time flight statistics, joint operation metrics, and gap analysis.",
+  "requestFramePermissions": []
+}
