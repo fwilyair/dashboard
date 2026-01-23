@@ -9,13 +9,13 @@ export const Header: React.FC = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
-    }, 1000);
+    }, 10000);
     return () => clearInterval(timer);
   }, []);
 
   const formatTime = (date: Date) => {
     const pad = (n: number) => n.toString().padStart(2, '0');
-    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}`;
   };
 
   return (
@@ -27,25 +27,10 @@ export const Header: React.FC = () => {
         </div>
       </div>
       <div className="flex items-center gap-4">
-        {/* Theme Toggle Button - Hidden
-        <button
-          onClick={toggleTheme}
-          className={`p-2.5 rounded-full transition-all duration-300 ${isDark
-              ? 'bg-slate-800/60 hover:bg-slate-700/80 text-amber-300 hover:text-amber-200'
-              : 'glass-card hover:bg-white/80 text-slate-600 hover:text-indigo-600'
-            }`}
-          aria-label={isDark ? '切换到浅色模式' : '切换到深色模式'}
-        >
-          {isDark ? <Sun size={20} /> : <Moon size={20} />}
-        </button>
-        */}
+        {/* Theme Toggle Button - Hidden ... */}
 
         <div className={`flex items-center gap-3 px-5 py-2 rounded-full ${isDark ? 'bg-slate-800/40' : 'glass-card'}`}>
-          <span className="relative flex h-3 w-3">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-          </span>
-          <span className={`text-2xl font-bold font-sans tabular-nums tracking-wide ${isDark ? 'text-white' : 'text-slate-600'}`}>{formatTime(currentTime)}</span>
+          <span className={`text-2xl font-bold font-mono tabular-nums tracking-wide ${isDark ? 'text-white' : 'text-slate-600'}`}>{formatTime(currentTime)}</span>
         </div>
       </div>
     </header>

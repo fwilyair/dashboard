@@ -82,10 +82,31 @@ export const AirportPanel: React.FC<AirportPanelProps> = ({ data, children }) =>
             </div>
           </div>
 
+          <style>
+            {`
+              @keyframes progressFlow {
+                0%, 100% { box-shadow: 0 0 10px currentColor, inset -4px 0 8px rgba(255,255,255,0.3); }
+                50% { box-shadow: 0 0 20px currentColor, inset -8px 0 12px rgba(255,255,255,0.5); }
+              }
+              @keyframes liquidInternal {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
+              }
+              @keyframes liquidEdge {
+                0%, 100% { border-top-right-radius: 40% 100%; border-bottom-right-radius: 60% 100%; }
+                50% { border-top-right-radius: 60% 100%; border-bottom-right-radius: 40% 100%; }
+              }
+            `}
+          </style>
           <div className={`w-full h-5 rounded-full mt-2 overflow-hidden ${isDark ? 'bg-white/10' : 'bg-slate-200/60'}`}>
             <div
-              className={`bg-gradient-to-r ${themeClasses.barGradient} h-full transition-all duration-1000 ease-out ${isDark ? 'shadow-[0_0_15px_currentColor]' : 'shadow-sm'}`}
-              style={{ width: `${data.totalFlights.percentage}%` }}
+              className={`bg-gradient-to-r ${themeClasses.barGradient} h-full transition-all duration-1000 ease-out rounded-l-full`}
+              style={{
+                width: `${data.totalFlights.percentage}%`,
+                backgroundSize: '200% 200%',
+                animation: isDark ? 'progressFlow 2s ease-in-out infinite, liquidInternal 5s ease-in-out infinite, liquidEdge 3s ease-in-out infinite' : undefined
+              }}
             ></div>
           </div>
         </div>
@@ -141,8 +162,12 @@ export const AirportAFooter: React.FC = () => {
             </div>
             <div className={`h-2 w-full rounded-full overflow-hidden ${isDark ? 'bg-slate-600/50' : 'bg-slate-300'}`}>
               <div
-                className={`h-full ${isDark ? agent.colorDark : agent.colorLight} bg-current ${isDark ? 'opacity-80 shadow-[0_0_8px_currentColor]' : 'opacity-70'} rounded-full`}
-                style={{ width: `${(agent.val / agent.total) * 100}%` }}
+                className={`h-full ${isDark ? agent.colorDark : agent.colorLight} bg-current ${isDark ? 'opacity-80' : 'opacity-70'} rounded-l-full`}
+                style={{
+                  width: `${(agent.val / agent.total) * 100}%`,
+                  backgroundSize: '200% 200%',
+                  animation: isDark ? 'progressFlow 2s ease-in-out infinite, liquidInternal 4s linear infinite, liquidEdge 3s ease-in-out infinite' : undefined
+                }}
               ></div>
             </div>
           </div>

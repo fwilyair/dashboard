@@ -149,11 +149,34 @@ const MatrixCell: React.FC<{
             </div>
 
             {/* Progress Bar with percentage inline */}
+            <style>
+                {`
+                  @keyframes progressFlow {
+                    0%, 100% { box-shadow: 0 0 8px currentColor, inset -4px 0 8px rgba(255,255,255,0.3); }
+                    50% { box-shadow: 0 0 16px currentColor, inset -8px 0 12px rgba(255,255,255,0.5); }
+                  }
+                  @keyframes liquidInternal {
+                    0% { background-position: 10% 10%; }
+                    25% { background-position: 90% 30%; }
+                    50% { background-position: 20% 80%; }
+                    75% { background-position: 80% 60%; }
+                    100% { background-position: 10% 10%; }
+                  }
+                  @keyframes liquidEdge {
+                    0%, 100% { border-top-right-radius: 40% 100%; border-bottom-right-radius: 60% 100%; }
+                    50% { border-top-right-radius: 60% 100%; border-bottom-right-radius: 40% 100%; }
+                  }
+                `}
+            </style>
             <div className="flex items-start gap-3 mb-4">
                 <div className={`h-3 flex-1 rounded-full overflow-hidden ${isDark ? 'bg-slate-600/50' : 'bg-slate-300'}`}>
                     <div
-                        className={`h-full bg-gradient-to-r ${theme.bar} rounded-full shadow-[0_0_8px_currentColor]`}
-                        style={{ width: `${pct}%` }}
+                        className={`h-full bg-gradient-to-r ${theme.bar} rounded-l-full`}
+                        style={{
+                            width: `${pct}%`,
+                            backgroundSize: '400% 400%',
+                            animation: isDark ? 'progressFlow 2s ease-in-out infinite, liquidInternal 10s ease-in-out infinite, liquidEdge 3s ease-in-out infinite' : undefined
+                        }}
                     />
                 </div>
                 <span className={`text-[36px] font-bold tech-font leading-none -mt-2 ${theme.primary} whitespace-nowrap`}>{metric.progressPercent.toFixed(2)}%</span>

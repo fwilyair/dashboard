@@ -21,21 +21,19 @@ const MetricValueCell: React.FC<{
     rowMin: number;
     rowMax: number;
 }> = ({ value, isDark, airportTheme, rowMin, rowMax }) => {
-    const barGradient = getUnifiedBarGradient(airportTheme, isDark);
-
-    // Discrete Color Logic
-    // Max -> Orange
-    // Min -> Cyan
-    // Rest -> White / Slate
-    let textColorClass = isDark ? 'text-white' : 'text-slate-600'; // Default Rest
+    let barGradient = '';
+    let textColorClass = '';
 
     if (value === rowMax) {
         textColorClass = isDark ? 'text-orange-400' : 'text-orange-600';
+        barGradient = isDark ? 'from-orange-500 to-orange-300' : 'from-orange-600 to-orange-400';
     } else if (value === rowMin) {
         textColorClass = isDark ? 'text-cyan-400' : 'text-cyan-600';
+        barGradient = isDark ? 'from-cyan-500 to-cyan-300' : 'from-cyan-600 to-cyan-400';
     } else {
-        // Rest - explicitly requested "unified middle color". White is good for dark mode.
+        // Rest - White (Dark) or Slate (Light)
         textColorClass = isDark ? 'text-white' : 'text-slate-600';
+        barGradient = isDark ? 'from-slate-100 to-slate-300' : 'from-slate-500 to-slate-400'; // White-ish gradient
     }
 
     return (
@@ -49,10 +47,33 @@ const MetricValueCell: React.FC<{
             </span>
 
             {/* Progress Bar */}
+            <style>
+                {`
+                  @keyframes progressFlow {
+                    0%, 100% { box-shadow: 0 0 6px currentColor, inset -3px 0 6px rgba(255,255,255,0.3); }
+                    50% { box-shadow: 0 0 12px currentColor, inset -6px 0 10px rgba(255,255,255,0.5); }
+                  }
+                  @keyframes liquidInternal {
+                    0% { background-position: 10% 10%; }
+                    25% { background-position: 90% 30%; }
+                    50% { background-position: 20% 80%; }
+                    75% { background-position: 80% 60%; }
+                    100% { background-position: 10% 10%; }
+                  }
+                  @keyframes liquidEdge {
+                    0%, 100% { border-top-right-radius: 40% 100%; border-bottom-right-radius: 60% 100%; }
+                    50% { border-top-right-radius: 60% 100%; border-bottom-right-radius: 40% 100%; }
+                  }
+                `}
+            </style>
             <div className={`w-full h-1.5 rounded-full overflow-hidden ${isDark ? 'bg-slate-600/50' : 'bg-slate-300'}`}>
                 <div
-                    className={`h-full rounded-full bg-gradient-to-r ${barGradient} ${isDark ? 'shadow-[0_0_8px_currentColor]' : ''}`}
-                    style={{ width: `${value}%` }}
+                    className={`h-full rounded-l-full bg-gradient-to-r ${barGradient}`}
+                    style={{
+                        width: `${value}%`,
+                        backgroundSize: '400% 400%',
+                        animation: isDark ? 'progressFlow 2s ease-in-out infinite, liquidInternal 10s ease-in-out infinite, liquidEdge 3s ease-in-out infinite' : undefined
+                    }}
                 />
             </div>
         </div>
