@@ -23,8 +23,44 @@ export const AirportPanel: React.FC<AirportPanelProps> = ({ data, children }) =>
       : (isTeal ? 'text-teal-600' : 'text-indigo-600'),
   };
 
+  const liquidStyle: React.CSSProperties = {
+    backgroundImage: isTeal
+      ? (isDark
+        ? 'linear-gradient(90deg, #5eead4 0%, #99f6e4 25%, #2dd4bf 50%, #99f6e4 75%, #5eead4 100%)'
+        : 'linear-gradient(90deg, #0d9488 0%, #14b8a6 25%, #0f766e 50%, #14b8a6 75%, #0d9488 100%)')
+      : (isDark
+        ? 'linear-gradient(90deg, #a5b4fc 0%, #c7d2fe 25%, #818cf8 50%, #c7d2fe 75%, #a5b4fc 100%)'
+        : 'linear-gradient(90deg, #4f46e5 0%, #6366f1 25%, #4338ca 50%, #6366f1 75%, #4f46e5 100%)'),
+    backgroundSize: '200% auto',
+    WebkitBackgroundClip: 'text',
+    backgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    color: 'transparent',
+    animation: 'liquidFn 4s ease-in-out infinite'
+  };
+
+  const liquidStyleWhite: React.CSSProperties = {
+    backgroundImage: isDark
+      ? 'linear-gradient(90deg, #ffffff 0%, #e2e8f0 25%, #94a3b8 50%, #e2e8f0 75%, #ffffff 100%)'
+      : 'linear-gradient(90deg, #94a3b8 0%, #cbd5e1 25%, #e2e8f0 50%, #cbd5e1 75%, #94a3b8 100%)',
+    backgroundSize: '200% auto',
+    WebkitBackgroundClip: 'text',
+    backgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    color: 'transparent',
+    animation: 'liquidFn 4s ease-in-out infinite'
+  };
+
   return (
     <section className="col-span-12 lg:col-span-4 flex flex-col h-full min-h-0 px-6 pb-4 pt-16 justify-between relative">
+      <style>
+        {`
+          @keyframes liquidFn {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+          }
+        `}
+      </style>
       <div className="flex flex-col gap-6 flex-shrink-0">
         <div className={`flex items-center gap-4 border-b pb-4 ${isAirportA ? 'justify-end' : 'justify-start'} ${isDark ? 'border-white/10' : 'border-slate-200/60'}`}>
           <div className={`order-first w-2 h-10 rounded-full ${isTeal ? 'bg-emerald-500' : 'bg-indigo-500'}`}></div>
@@ -35,12 +71,12 @@ export const AirportPanel: React.FC<AirportPanelProps> = ({ data, children }) =>
 
         <div className="flex flex-col gap-2 py-0">
           <div className={`flex items-end gap-4 ${isAirportA ? 'justify-end' : 'justify-start'}`}>
-            <span className={`text-8xl lg:text-9xl font-black tech-font ${themeClasses.executedText} leading-none tracking-tighter drop-shadow-pop`}>
+            <span className="text-8xl lg:text-9xl font-black tech-font leading-none tracking-tighter drop-shadow-pop" style={liquidStyle}>
               {data.totalFlights.executed}
             </span>
 
             <div className={`flex flex-col pb-3 items-end`}>
-              <span className={`text-4xl lg:text-5xl font-bold tech-font ${isDark ? 'text-white' : 'text-slate-400'}`}>
+              <span className="text-4xl lg:text-5xl font-bold tech-font" style={liquidStyleWhite}>
                 / {data.totalFlights.planned}
               </span>
             </div>

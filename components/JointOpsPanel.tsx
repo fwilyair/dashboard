@@ -9,8 +9,52 @@ interface JointOpsPanelProps {
 export const JointOpsPanel: React.FC<JointOpsPanelProps> = ({ data }) => {
   const { isDark } = useTheme();
 
+  const liquidStyle: React.CSSProperties = {
+    backgroundImage: isDark
+      ? 'linear-gradient(90deg, #7dd3fc 0%, #38bdf8 25%, #bae6fd 50%, #38bdf8 75%, #7dd3fc 100%)'
+      : 'linear-gradient(90deg, #0284c7 0%, #0ea5e9 25%, #7dd3fc 50%, #0ea5e9 75%, #0284c7 100%)',
+    backgroundSize: '200% auto',
+    WebkitBackgroundClip: 'text',
+    backgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    color: 'transparent',
+    animation: 'liquidFn 4s ease-in-out infinite'
+  };
+
+  const liquidStyleWhite: React.CSSProperties = {
+    backgroundImage: isDark
+      ? 'linear-gradient(90deg, #ffffff 0%, #e2e8f0 25%, #94a3b8 50%, #e2e8f0 75%, #ffffff 100%)'
+      : 'linear-gradient(90deg, #94a3b8 0%, #cbd5e1 25%, #e2e8f0 50%, #cbd5e1 75%, #94a3b8 100%)',
+    backgroundSize: '200% auto',
+    WebkitBackgroundClip: 'text',
+    backgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    color: 'transparent',
+    animation: 'liquidFn 4s ease-in-out infinite'
+  };
+
+  const liquidStyleOrange: React.CSSProperties = {
+    backgroundImage: isDark
+      ? 'linear-gradient(90deg, #fb923c 0%, #fdba74 25%, #fed7aa 50%, #fdba74 75%, #fb923c 100%)'
+      : 'linear-gradient(90deg, #ea580c 0%, #fb923c 25%, #fdba74 50%, #fb923c 75%, #ea580c 100%)',
+    backgroundSize: '200% auto',
+    WebkitBackgroundClip: 'text',
+    backgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    color: 'transparent',
+    animation: 'liquidFn 4s ease-in-out infinite'
+  };
+
   return (
     <section className="col-span-12 lg:col-span-4 h-full flex flex-col min-h-0 px-4 pt-2 justify-start gap-6 pb-24 relative z-20">
+      <style>
+        {`
+          @keyframes liquidFn {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+          }
+        `}
+      </style>
 
       {/* Top Stats Area */}
       <div className="flex flex-col items-center gap-4 mb-6">
@@ -19,20 +63,21 @@ export const JointOpsPanel: React.FC<JointOpsPanelProps> = ({ data }) => {
         </div>
 
         {/* Numbers and labels container - Grid layout */}
-        <div className="grid grid-cols-[auto_auto] gap-x-2 gap-y-2 justify-center items-baseline">
-          {/* Row 1: Numbers */}
-          <span className={`text-8xl lg:text-9xl font-black tech-font tracking-tighter drop-shadow-pop leading-none text-right ${isDark ? 'text-sky-300' : 'text-sky-600'}`}>
-            {data.totalExecuted}
-          </span>
-          <div className="flex items-baseline">
-            <span className={`text-6xl lg:text-7xl font-bold tech-font tracking-tight leading-none ${isDark ? 'text-white' : 'text-slate-400'}`}>/</span>
-            <span className={`text-6xl lg:text-7xl font-bold tech-font tracking-tight leading-none ${isDark ? 'text-white' : 'text-slate-400'}`}>
-              {data.totalPlanned}
+        {/* Numbers and labels container - Flex layout for shared gradient */}
+        <div className="flex flex-col items-center gap-2">
+          <div className="flex items-baseline gap-2">
+            <span className="text-8xl lg:text-9xl font-black tech-font tracking-tighter drop-shadow-pop leading-none text-right" style={liquidStyle}>
+              {data.totalExecuted}
+            </span>
+            <span className="text-6xl lg:text-7xl font-bold tech-font tracking-tight leading-none" style={liquidStyleWhite}>
+              / {data.totalPlanned}
             </span>
           </div>
-          {/* Row 2: Labels - aligned right under their numbers */}
-          <span className={`text-sm font-bold uppercase tracking-widest text-right ${isDark ? 'text-[#7DD3FC]' : 'text-sky-700/70'}`}>总执行</span>
-          <span className={`text-sm font-bold uppercase tracking-widest text-right ${isDark ? 'text-white' : 'text-slate-400'}`}>总计划</span>
+
+          <div className="flex justify-center gap-8 w-full">
+            <span className={`text-sm font-bold uppercase tracking-widest ${isDark ? 'text-[#7DD3FC]' : 'text-sky-700/70'}`}>总执行</span>
+            <span className={`text-sm font-bold uppercase tracking-widest ${isDark ? 'text-white' : 'text-slate-400'}`}>总计划</span>
+          </div>
         </div>
       </div>
 
@@ -62,16 +107,25 @@ export const JointOpsPanel: React.FC<JointOpsPanelProps> = ({ data }) => {
               <div className="grid grid-cols-[auto_min-content] gap-x-8 gap-y-1 justify-end justify-items-end flex-1 items-baseline">
                 {/* Executed / Planned Numbers */}
                 <div className="flex items-baseline gap-2">
-                  <span className={`text-6xl font-black tech-font tracking-tighter drop-shadow-pop leading-none ${isDark ? 'text-sky-300' : 'text-sky-600'}`}>
+                  <span className="text-6xl font-black tech-font tracking-tighter drop-shadow-pop leading-none" style={{
+                    ...liquidStyle,
+                    animationDelay: `${-(index * 2.3) % 4}s` // Randomized/Staggered start
+                  }}>
                     {gap.act}
                   </span>
-                  <span className={`text-3xl font-bold tech-font leading-none ${isDark ? 'text-white' : 'text-slate-400'}`}>
+                  <span className="text-3xl font-bold tech-font leading-none" style={{
+                    ...liquidStyleWhite,
+                    animationDelay: `${-(index * 2.3) % 4}s`
+                  }}>
                     / {gap.plan}
                   </span>
                 </div>
 
                 {/* Not Executed Number */}
-                <span className={`text-[30px] font-bold tech-font leading-none opacity-90 min-w-[3.5rem] text-right ${isDark ? 'text-[#FB923C]' : 'text-orange-600'}`}>
+                <span className="text-[30px] font-bold tech-font leading-none opacity-90 min-w-[3.5rem] text-right" style={{
+                  ...liquidStyleOrange,
+                  animationDelay: `${-(index * 2.3) % 4}s`
+                }}>
                   {Math.max(0, gap.plan - gap.act)}
                 </span>
 
