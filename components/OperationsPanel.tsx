@@ -88,9 +88,12 @@ export const OperationsPanel: React.FC<OperationsPanelProps> = ({ data }) => {
 
                     {/* A 机场 Header */}
                     <div className="flex-[4] flex flex-col px-6">
-                        <h3 className={`text-[48px] font-black tracking-tight text-left mb-10 ${isDark ? 'text-white drop-shadow-lg' : 'text-slate-800'}`}>
-                            {data.airportA.name}
-                        </h3>
+                        <div className="flex items-center gap-3 mb-10">
+                            <div className="w-2 h-10 rounded-full bg-emerald-500"></div>
+                            <h3 className={`text-[48px] font-black tracking-tight text-left ${isDark ? 'text-white drop-shadow-lg' : 'text-slate-800'}`}>
+                                {data.airportA.name}
+                            </h3>
+                        </div>
                         <div className="flex justify-around gap-4">
                             {data.airportA.agents.map((agent, index) => (
                                 <div key={index} className="flex-1 text-center min-w-[120px]">
@@ -108,9 +111,12 @@ export const OperationsPanel: React.FC<OperationsPanelProps> = ({ data }) => {
 
                     {/* B 机场 Header */}
                     <div className="flex-[1.5] flex flex-col px-6">
-                        <h3 className={`text-[48px] font-black tracking-tight text-left mb-10 ${isDark ? 'text-white drop-shadow-lg' : 'text-slate-800'}`}>
-                            {data.airportB.name}
-                        </h3>
+                        <div className="flex items-center gap-3 mb-10">
+                            <div className="w-2 h-10 rounded-full bg-indigo-500"></div>
+                            <h3 className={`text-[48px] font-black tracking-tight text-left ${isDark ? 'text-white drop-shadow-lg' : 'text-slate-800'}`}>
+                                {data.airportB.name}
+                            </h3>
+                        </div>
                         <div className="flex justify-center gap-4">
                             {data.airportB.agents.map((agent, index) => (
                                 <div key={index} className="w-full text-center">

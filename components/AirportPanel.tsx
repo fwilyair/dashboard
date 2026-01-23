@@ -15,7 +15,9 @@ export const AirportPanel: React.FC<AirportPanelProps> = ({ data, children }) =>
 
   const themeClasses = {
     title: isTeal ? 'text-teal-700' : 'text-indigo-700',
-    barGradient: isTeal ? 'from-teal-400 to-teal-600' : 'from-indigo-400 to-indigo-600',
+    barGradient: isTeal
+      ? (isDark ? 'from-teal-500 to-teal-300' : 'from-teal-600 to-teal-400')
+      : (isDark ? 'from-indigo-500 to-indigo-300' : 'from-indigo-600 to-indigo-400'),
     executedText: isDark
       ? (isTeal ? 'text-teal-300' : 'text-indigo-300')
       : (isTeal ? 'text-teal-600' : 'text-indigo-600'),
@@ -25,7 +27,7 @@ export const AirportPanel: React.FC<AirportPanelProps> = ({ data, children }) =>
     <section className="col-span-12 lg:col-span-4 flex flex-col h-full min-h-0 px-6 pb-4 pt-16 justify-between relative">
       <div className="flex flex-col gap-6 flex-shrink-0">
         <div className={`flex items-center gap-4 border-b pb-4 ${isAirportA ? 'justify-end' : 'justify-start'} ${isDark ? 'border-white/10' : 'border-slate-200/60'}`}>
-          <div className={`order-first w-2 h-10 rounded-full ${isTeal ? 'bg-emerald-500' : 'bg-sky-500'}`}></div>
+          <div className={`order-first w-2 h-10 rounded-full ${isTeal ? 'bg-emerald-500' : 'bg-indigo-500'}`}></div>
           <div className={isAirportA ? 'text-right' : 'text-left'}>
             <h2 className={`text-[48px] font-black tracking-tight ${isDark ? 'text-white drop-shadow-md' : 'text-slate-700 drop-shadow-soft'}`}>{data.name}</h2> {/* Explicit 48px */}
           </div>

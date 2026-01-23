@@ -6,22 +6,22 @@ import { OPERATION_DATA, formatMetricValue, OperationMetric } from '../operation
 const MatrixCell: React.FC<{
     metric: OperationMetric;
     type: 'flights' | 'passengers' | 'cargo';
-    colorTheme: 'sky' | 'emerald' | 'amber';
+    colorTheme: 'indigo' | 'emerald' | 'amber';
 }> = ({ metric, type, colorTheme }) => {
     const { isDark } = useTheme();
 
     const colors = {
-        sky: {
-            primary: isDark ? 'text-sky-300' : 'text-sky-600',
-            bar: isDark ? 'bg-sky-400' : 'bg-sky-500',
+        indigo: {
+            primary: isDark ? 'text-indigo-300' : 'text-indigo-600',
+            bar: isDark ? 'from-indigo-500 to-indigo-300' : 'from-indigo-600 to-indigo-400',
         },
         emerald: {
             primary: isDark ? 'text-emerald-300' : 'text-emerald-600',
-            bar: isDark ? 'bg-emerald-400' : 'bg-emerald-500',
+            bar: isDark ? 'from-emerald-500 to-emerald-300' : 'from-emerald-600 to-emerald-400',
         },
         amber: {
             primary: isDark ? 'text-amber-300' : 'text-amber-600',
-            bar: isDark ? 'bg-amber-400' : 'bg-amber-500',
+            bar: isDark ? 'from-amber-500 to-amber-300' : 'from-amber-600 to-amber-400',
         },
     };
 
@@ -108,7 +108,7 @@ const MatrixCell: React.FC<{
                     <span className={`text-5xl font-bold tech-font tracking-tight leading-none ${theme.primary}`}>
                         {formatted.val}
                     </span>
-                    <span className={`text-lg font-medium ${textWhite}`}>累计完成</span>
+                    <span className={`text-lg font-medium italic ${textWhite}`}>累计完成</span>
                 </div>
 
                 {/* Right: Year Target with Gradient Fill - UNIFIED GOLD COLOR */}
@@ -130,14 +130,14 @@ const MatrixCell: React.FC<{
             </div>
 
             {/* Progress Bar with percentage inline */}
-            <div className="flex items-center gap-3 mb-4">
+            <div className="flex items-start gap-3 mb-4">
                 <div className={`h-3 flex-1 rounded-full overflow-hidden ${isDark ? 'bg-slate-600/50' : 'bg-slate-300'}`}>
                     <div
-                        className={`h-full ${theme.bar} rounded-full shadow-[0_0_8px_currentColor]`}
+                        className={`h-full bg-gradient-to-r ${theme.bar} rounded-full shadow-[0_0_8px_currentColor]`}
                         style={{ width: `${pct}%` }}
                     />
                 </div>
-                <span className={`text-3xl font-bold tech-font ${theme.primary} whitespace-nowrap`}>{metric.progressPercent.toFixed(2)}%</span>
+                <span className={`text-[36px] font-bold tech-font leading-none -mt-2 ${theme.primary} whitespace-nowrap`}>{metric.progressPercent.toFixed(2)}%</span>
             </div>
 
             {/* Details Grid */}
@@ -151,24 +151,24 @@ const MatrixCell: React.FC<{
                 };
                 const ratioLabel = ratioLabels[colorTheme] || '两场占比';
                 return (
-                    <div className="grid grid-cols-3 gap-x-2 gap-y-1">
+                    <div className="grid grid-cols-3">
                         <div className="flex flex-col items-start gap-0.5">
-                            <span className={`text-base ${textWhite}`}>计划完成</span>
-                            <span className={`text-3xl font-bold tech-font ${isDark ? 'text-slate-200' : 'text-slate-700'}`}>
+                            <span className={`text-4xl font-bold tech-font ${isDark ? 'text-slate-200' : 'text-slate-700'}`}>
                                 {fmtDetail(metric.plannedComplete)}
                             </span>
+                            <span className={`text-base italic ${textWhite}`}>计划完成</span>
                         </div>
                         <div className="flex flex-col items-start gap-0.5">
-                            <span className={`text-base ${textWhite}`}>日均达标</span>
-                            <span className={`text-3xl font-bold tech-font ${isDark ? 'text-slate-200' : 'text-slate-700'}`}>
+                            <span className={`text-4xl font-bold tech-font ${isDark ? 'text-slate-200' : 'text-slate-700'}`}>
                                 {fmtDetail(metric.dailyRequired)}
                             </span>
+                            <span className={`text-base italic ${textWhite}`}>日均达标</span>
                         </div>
                         <div className="flex flex-col items-start gap-0.5">
-                            <span className={`text-base ${textWhite}`}>{ratioLabel}</span>
-                            <span className={`text-3xl font-bold tech-font ${theme.primary}`}>
+                            <span className={`text-4xl font-bold tech-font ${theme.primary}`}>
                                 {metric.twoAirportRatio}%
                             </span>
+                            <span className={`text-base italic ${textWhite}`}>{ratioLabel}</span>
                         </div>
                     </div>
                 );
@@ -205,12 +205,15 @@ export const OperationPanel: React.FC = () => {
 
                 {/* --- Row 1 Header (Airports) --- Swapped colors: A=emerald, B=sky */}
                 <div className="col-start-2 flex items-center gap-4 border-b border-white/5 pb-2">
+                    <div className="w-2 h-10 rounded-full bg-emerald-500"></div>
                     <h3 className={`text-5xl font-black ${headerTextColor}`}>A机场</h3>
                 </div>
                 <div className="col-start-3 flex items-center gap-4 border-b border-white/5 pb-2">
+                    <div className="w-2 h-10 rounded-full bg-indigo-500"></div>
                     <h3 className={`text-5xl font-black ${headerTextColor}`}>B机场</h3>
                 </div>
                 <div className="col-start-4 flex items-center gap-4 border-b border-white/5 pb-2">
+                    <div className="w-2 h-10 rounded-full bg-amber-500"></div>
                     <h3 className={`text-5xl font-black ${headerTextColor}`}>两场合计</h3>
                 </div>
 
@@ -218,54 +221,54 @@ export const OperationPanel: React.FC = () => {
                 {/* --- Row 2: Flights --- */}
                 {/* Label with Unit */}
                 <div className="flex items-center justify-end px-4 border-r border-white/[0.02]">
-                    <div className="flex flex-col items-end">
+                    <div className="flex items-baseline gap-2">
                         <span className={`text-4xl font-black ${isDark ? 'text-white' : 'text-slate-700'}`}>
-                            累计航班架次
+                            航班架次
                         </span>
-                        <span className={`text-lg font-medium ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
+                        <span className={`text-lg font-medium italic ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
                             {metricUnits.flights}
                         </span>
                     </div>
                 </div>
                 {/* Cells - Swapped colors */}
                 <MatrixCell metric={OPERATION_DATA.airportA.metrics.flights} type="flights" colorTheme="emerald" />
-                <MatrixCell metric={OPERATION_DATA.airportB.metrics.flights} type="flights" colorTheme="sky" />
+                <MatrixCell metric={OPERATION_DATA.airportB.metrics.flights} type="flights" colorTheme="indigo" />
                 <MatrixCell metric={OPERATION_DATA.combined.metrics.flights} type="flights" colorTheme="amber" />
 
 
                 {/* --- Row 3: Passengers --- */}
                 {/* Label with Unit */}
                 <div className="flex items-center justify-end px-4 border-r border-white/[0.02]">
-                    <div className="flex flex-col items-end">
+                    <div className="flex items-baseline gap-2">
                         <span className={`text-4xl font-black ${isDark ? 'text-white' : 'text-slate-700'}`}>
                             旅客吞吐量
                         </span>
-                        <span className={`text-lg font-medium ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
+                        <span className={`text-lg font-medium italic ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
                             {metricUnits.passengers}
                         </span>
                     </div>
                 </div>
                 {/* Cells - Swapped colors */}
                 <MatrixCell metric={OPERATION_DATA.airportA.metrics.passengers} type="passengers" colorTheme="emerald" />
-                <MatrixCell metric={OPERATION_DATA.airportB.metrics.passengers} type="passengers" colorTheme="sky" />
+                <MatrixCell metric={OPERATION_DATA.airportB.metrics.passengers} type="passengers" colorTheme="indigo" />
                 <MatrixCell metric={OPERATION_DATA.combined.metrics.passengers} type="passengers" colorTheme="amber" />
 
 
                 {/* --- Row 4: Cargo --- */}
                 {/* Label with Unit */}
                 <div className="flex items-center justify-end px-4 border-r border-white/[0.02]">
-                    <div className="flex flex-col items-end">
+                    <div className="flex items-baseline gap-2">
                         <span className={`text-4xl font-black ${isDark ? 'text-white' : 'text-slate-700'}`}>
                             货邮吞吐量
                         </span>
-                        <span className={`text-lg font-medium ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
+                        <span className={`text-lg font-medium italic ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
                             {metricUnits.cargo}
                         </span>
                     </div>
                 </div>
                 {/* Cells - Swapped colors */}
                 <MatrixCell metric={OPERATION_DATA.airportA.metrics.cargo} type="cargo" colorTheme="emerald" />
-                <MatrixCell metric={OPERATION_DATA.airportB.metrics.cargo} type="cargo" colorTheme="sky" />
+                <MatrixCell metric={OPERATION_DATA.airportB.metrics.cargo} type="cargo" colorTheme="indigo" />
                 <MatrixCell metric={OPERATION_DATA.combined.metrics.cargo} type="cargo" colorTheme="amber" />
 
             </div>

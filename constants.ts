@@ -13,8 +13,8 @@ export const AIRPORT_A_DATA: AirportData = {
   metrics: {
     domPax: { label: '国内客机', subLabel: '', executed: 300, planned: 350, percentage: 85 },
     domCgo: { label: '国内货机', subLabel: '', executed: 50, planned: 60, percentage: 83 },
-    intPax: { label: '国际客机', subLabel: '', executed: 200, planned: 250, percentage: 80 },
-    intCgo: { label: '国际货机', subLabel: '', executed: 100, planned: 140, percentage: 71 },
+    intPax: { label: '国际/地区客机', subLabel: '', executed: 200, planned: 250, percentage: 80 },
+    intCgo: { label: '国际/地区货机', subLabel: '', executed: 100, planned: 140, percentage: 71 },
   },
 };
 
@@ -31,8 +31,8 @@ export const AIRPORT_B_DATA: AirportData = {
   metrics: {
     domPax: { label: '国内客机', subLabel: '', executed: 280, planned: 320, percentage: 88 },
     domCgo: { label: '国内货机', subLabel: '', executed: 45, planned: 50, percentage: 90 },
-    intPax: { label: '国际客机', subLabel: '', executed: 190, planned: 240, percentage: 79 },
-    intCgo: { label: '国际货机', subLabel: '', executed: 75, planned: 90, percentage: 83 },
+    intPax: { label: '国际/地区客机', subLabel: '', executed: 190, planned: 240, percentage: 79 },
+    intCgo: { label: '国际/地区货机', subLabel: '', executed: 75, planned: 90, percentage: 83 },
   },
 };
 
@@ -43,7 +43,7 @@ export const JOINT_OPS_DATA: JointOpsData = {
   gaps: [
     { label: '国内客机', gapValue: -90, plan: 670, act: 580, percentage: 86 },
     { label: '国内货机', gapValue: -15, plan: 110, act: 95, percentage: 86 },
-    { label: '国际客机', gapValue: -100, plan: 490, act: 390, percentage: 79 },
-    { label: '国际货机', gapValue: -55, plan: 230, act: 175, percentage: 76 },
+    { label: '国际/地区客机', gapValue: -100, plan: 490, act: 390, percentage: 79 },
+    { label: '国际/地区货机', gapValue: -55, plan: 230, act: 175, percentage: 76 },
   ],
 };
