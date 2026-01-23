@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { HourlyFlightData } from '../operationConstants';
 import { useTheme } from '../ThemeContext';
 
@@ -22,6 +22,24 @@ export const HourlyFlightChart: React.FC<HourlyFlightChartProps> = ({
     delayOffset = 0
 }) => {
     const { isDark } = useTheme();
+
+    // Sync animation with absolute time
+    const [pathStyles, setPathStyles] = useState<{ dep: React.CSSProperties, arr: React.CSSProperties }>({
+        dep: { animationDelay: '0s', opacity: 0 }, // Init hidden to prevent flash
+        arr: { animationDelay: '0s', opacity: 0 }
+    });
+
+    useEffect(() => {
+        const now = Date.now() / 1000;
+        const cycle = 24;
+        const offset = now % cycle;
+
+        // Calculate negative delays to fast-forward animation to correct frame
+        setPathStyles({
+            dep: { animationDelay: `${delayOffset - offset}s` },
+            arr: { animationDelay: `${delayOffset + 6 - offset}s` }
+        });
+    }, [delayOffset]);
 
     // Dimensions
     const width = 1200;
@@ -141,7 +159,7 @@ export const HourlyFlightChart: React.FC<HourlyFlightChartProps> = ({
                                 .flow-effect {
                                     stroke-dasharray: 300 3000;
                                     stroke-linecap: round;
-                                    animation: flowAnim 24s linear infinite;
+                                    animation: flowAnim 24s linear infinite both;
                                 }
                             `}
                         </style>
@@ -309,7 +327,7 @@ export const HourlyFlightChart: React.FC<HourlyFlightChartProps> = ({
                         className="flow-effect"
                         filter="url(#glow)"
                         opacity="1"
-                        style={{ animationDelay: `${delayOffset}s` } as React.CSSProperties}
+                        style={pathStyles.dep}
                     />
                     <path
                         d={getPathOriginal('arrPlanned', 1)}
@@ -319,7 +337,7 @@ export const HourlyFlightChart: React.FC<HourlyFlightChartProps> = ({
                         className="flow-effect"
                         filter="url(#glow)"
                         opacity="1"
-                        style={{ animationDelay: `${delayOffset + 6}s` } as React.CSSProperties}
+                        style={pathStyles.arr}
                     />
 
                 </svg>
