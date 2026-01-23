@@ -98,7 +98,7 @@ export const OperationsPanel: React.FC<OperationsPanelProps> = ({ data }) => {
                             {data.airportA.agents.map((agent, index) => (
                                 <div key={index} className="flex-1 text-center min-w-[120px]">
                                     {/* Increased Font Size: text-2xl -> text-3xl */}
-                                    <span className={`text-3xl font-black ${isDark ? 'text-white' : 'text-slate-700'} filter drop-shadow-sm`}>
+                                    <span className={`text-[36px] font-black ${isDark ? 'text-white' : 'text-slate-700'} filter drop-shadow-sm`}>
                                         {agent.name}
                                     </span>
                                 </div>
@@ -121,7 +121,7 @@ export const OperationsPanel: React.FC<OperationsPanelProps> = ({ data }) => {
                             {data.airportB.agents.map((agent, index) => (
                                 <div key={index} className="w-full text-center">
                                     {/* Increased Font Size: text-2xl -> text-3xl */}
-                                    <span className={`text-3xl font-black ${isDark ? 'text-white' : 'text-slate-700'} filter drop-shadow-sm`}>
+                                    <span className={`text-[36px] font-black ${isDark ? 'text-white' : 'text-slate-700'} filter drop-shadow-sm`}>
                                         {agent.name}
                                     </span>
                                 </div>
@@ -145,7 +145,7 @@ export const OperationsPanel: React.FC<OperationsPanelProps> = ({ data }) => {
 
                                 {/* Label Column - Changed to White */}
                                 <div className="w-[320px] flex-shrink-0 pl-4 mb-[2px]">
-                                    <span className={`text-3xl font-bold tracking-tight whitespace-nowrap ${isDark ? 'text-white' : 'text-slate-800'}`}>
+                                    <span className={`text-[36px] font-bold tracking-tight whitespace-nowrap ${isDark ? 'text-white' : 'text-slate-800'}`}>
                                         {METRIC_LABELS[key]}
                                     </span>
                                 </div>

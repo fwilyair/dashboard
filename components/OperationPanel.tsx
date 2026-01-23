@@ -102,27 +102,46 @@ const MatrixCell: React.FC<{
             style={{ borderColor: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.03)' }}>
 
             {/* Top Row: Actual (Left) + Target (Right) */}
-            <div className="flex justify-between items-end mb-2">
+            <div className="flex justify-between items-baseline mb-2">
                 {/* Left: Actual Complete */}
                 <div className="flex flex-col items-start gap-1 mb-1">
                     <span className={`text-5xl font-bold tech-font tracking-tight leading-none ${theme.primary}`}>
                         {formatted.val}
                     </span>
-                    <span className={`text-lg font-medium italic ${textWhite}`}>累计完成</span>
+                    <span className={`text-lg font-medium ${textWhite}`}>累计完成</span>
                 </div>
 
-                {/* Right: Year Target with Gradient Fill - UNIFIED GOLD COLOR */}
+                <style>
+                    {`
+                        @keyframes waterShake {
+                            0% { background-position: calc(var(--bg-pos) - 2%) 0; }
+                            50% { background-position: calc(var(--bg-pos) + 2%) 0; }
+                            100% { background-position: calc(var(--bg-pos) - 2%) 0; }
+                        }
+                    `}
+                </style>
+                {/* Right: Year Target with Water Edge Shake Effect */}
                 <div className="flex items-baseline">
                     <span
-                        className="text-7xl lg:text-8xl font-black tech-font tracking-tight leading-none"
+                        className="text-7xl lg:text-8xl font-black tech-font tracking-tight leading-none italic pr-4"
                         style={{
-                            backgroundImage: `linear-gradient(to right, ${activeColor} ${pct}%, ${inactiveColor} ${pct}%)`,
+                            '--bg-pos': `${100 - pct}%`,
+                            backgroundImage: `
+                                linear-gradient(86deg, 
+                                    ${activeColor} 49.5%, 
+                                    rgba(255,255,255,0.8) 50%, 
+                                    ${inactiveColor} 50.5%
+                                )
+                            `,
+                            backgroundSize: '200% 100%',
+                            backgroundPosition: 'var(--bg-pos) 0',
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
                             backgroundClip: 'text',
                             color: 'transparent',
-                            display: 'inline-block'
-                        }}
+                            display: 'inline-block',
+                            animation: 'waterShake 2.5s ease-in-out infinite'
+                        } as React.CSSProperties}
                     >
                         {yearTargetFormatted.val}
                     </span>
@@ -151,24 +170,24 @@ const MatrixCell: React.FC<{
                 };
                 const ratioLabel = ratioLabels[colorTheme] || '两场占比';
                 return (
-                    <div className="grid grid-cols-3">
+                    <div className="grid grid-cols-3 items-end">
                         <div className="flex flex-col items-start gap-0.5">
-                            <span className={`text-4xl font-bold tech-font ${isDark ? 'text-slate-200' : 'text-slate-700'}`}>
+                            <span className={`text-5xl font-bold tech-font tracking-tight leading-none ${isDark ? 'text-slate-200' : 'text-slate-700'}`}>
                                 {fmtDetail(metric.plannedComplete)}
                             </span>
-                            <span className={`text-base italic ${textWhite}`}>计划完成</span>
+                            <span className={`text-base ${textWhite}`}>计划完成</span>
                         </div>
                         <div className="flex flex-col items-start gap-0.5">
                             <span className={`text-4xl font-bold tech-font ${isDark ? 'text-slate-200' : 'text-slate-700'}`}>
                                 {fmtDetail(metric.dailyRequired)}
                             </span>
-                            <span className={`text-base italic ${textWhite}`}>日均达标</span>
+                            <span className={`text-base ${textWhite}`}>日均达标</span>
                         </div>
                         <div className="flex flex-col items-start gap-0.5">
                             <span className={`text-4xl font-bold tech-font ${theme.primary}`}>
                                 {metric.twoAirportRatio}%
                             </span>
-                            <span className={`text-base italic ${textWhite}`}>{ratioLabel}</span>
+                            <span className={`text-base ${textWhite}`}>{ratioLabel}</span>
                         </div>
                     </div>
                 );
@@ -225,7 +244,7 @@ export const OperationPanel: React.FC = () => {
                         <span className={`text-4xl font-black ${isDark ? 'text-white' : 'text-slate-700'}`}>
                             航班架次
                         </span>
-                        <span className={`text-lg font-medium italic ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
+                        <span className={`text-lg font-medium ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
                             {metricUnits.flights}
                         </span>
                     </div>
@@ -243,7 +262,7 @@ export const OperationPanel: React.FC = () => {
                         <span className={`text-4xl font-black ${isDark ? 'text-white' : 'text-slate-700'}`}>
                             旅客吞吐量
                         </span>
-                        <span className={`text-lg font-medium italic ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
+                        <span className={`text-lg font-medium ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
                             {metricUnits.passengers}
                         </span>
                     </div>
@@ -261,7 +280,7 @@ export const OperationPanel: React.FC = () => {
                         <span className={`text-4xl font-black ${isDark ? 'text-white' : 'text-slate-700'}`}>
                             货邮吞吐量
                         </span>
-                        <span className={`text-lg font-medium italic ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
+                        <span className={`text-lg font-medium ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
                             {metricUnits.cargo}
                         </span>
                     </div>

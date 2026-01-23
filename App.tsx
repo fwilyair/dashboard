@@ -4,13 +4,14 @@ import { AirportPanel, AirportAFooter } from './components/AirportPanel';
 import { JointOpsPanel } from './components/JointOpsPanel';
 import { OperationsPanel } from './components/OperationsPanel';
 import { OperationPanel } from './components/OperationPanel';
+import { ReleasePanel } from './components/ReleasePanel';
 import { FluidBackground } from './components/FluidBackground';
 import { AIRPORT_A_DATA, AIRPORT_B_DATA, JOINT_OPS_DATA } from './constants';
 import { OPERATIONS_DATA } from './operationsConstants';
 import { useTheme } from './ThemeContext';
 
 const CAROUSEL_INTERVAL = 10000; // 10 seconds
-const TOTAL_PAGES = 3;
+const TOTAL_PAGES = 4;
 
 const App: React.FC = () => {
   const { isDark } = useTheme();
@@ -91,12 +92,19 @@ const App: React.FC = () => {
           </div>
         )}
 
+        {/* Page 3: Release */}
+        {currentPage === 3 && (
+          <div className="flex-1 min-h-0">
+            <ReleasePanel />
+          </div>
+        )}
+
         {/* Bottom Alignment Decoration Line */}
         <div className={`w-full h-[2px] mt-2 bg-gradient-to-r from-transparent to-transparent shrink-0 ${isDark ? 'via-slate-600 opacity-50' : 'via-slate-300 opacity-60'}`}></div>
 
         {/* Page Indicator - Clickable */}
         <div className="flex justify-center items-center gap-3 mt-3">
-          {[0, 1, 2].map((index) => (
+          {[0, 1, 2, 3].map((index) => (
             <button
               key={index}
               onClick={() => goToPage(index)}
@@ -104,7 +112,7 @@ const App: React.FC = () => {
                 ? (isDark ? 'bg-sky-400 w-8' : 'bg-sky-600 w-8')
                 : (isDark ? 'bg-slate-600 w-3' : 'bg-slate-300 w-3')
                 }`}
-              aria-label={`Switch to ${index === 0 ? 'Situation' : index === 1 ? 'Target' : 'Operation'}`}
+              aria-label={`Switch to ${index === 0 ? 'Situation' : index === 1 ? 'Target' : index === 2 ? 'Operation' : 'Release'}`}
             />
           ))}
           <span className={`ml-4 text-xs font-medium ${isDark ? 'text-slate-500' : 'text-slate-400'} hidden`}>

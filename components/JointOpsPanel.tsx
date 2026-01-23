@@ -50,8 +50,8 @@ export const JointOpsPanel: React.FC<JointOpsPanelProps> = ({ data }) => {
               {/* Label Section - aligned with numbers baseline */}
               <div className="flex-shrink-0 flex items-center">
                 <span className={`text-5xl font-black tracking-tight leading-none ${isDark
-                  ? 'text-white drop-shadow-md'
-                  : 'text-slate-600 drop-shadow-soft'
+                  ? (gap.label.includes('国际') ? 'text-sky-400 drop-shadow-md' : 'text-white drop-shadow-md')
+                  : (gap.label.includes('国际') ? 'text-sky-600 drop-shadow-soft' : 'text-slate-600 drop-shadow-soft')
                   }`}>
                   {gap.label}
                 </span>

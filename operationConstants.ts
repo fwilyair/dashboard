@@ -36,26 +36,26 @@ export interface AirportOperationData {
 // Date: 10-24 (Day 297~298), actuals should be 75%-90% of targets
 const RAW_DATA = {
     airportA: {
-        // Target 380k, 82% -> ~311,600
-        flights: { target: 380000, actual: 311600, daily: 1050, ratio: 58.2 },
-        // Target 52M, 85% -> ~44.2M
-        passengers: { target: 52000000, actual: 44200000, daily: 145000, ratio: 62.5 },
-        // Target 680k, 78% -> ~530,400
-        cargo: { target: 680000, actual: 530400, daily: 1890, ratio: 71.3 }
+        // Target 380k, ~31% -> 120,000
+        flights: { target: 380000, actual: 120000, daily: 1050, ratio: 58.2 },
+        // Target 52M, ~50% -> 26,000,000
+        passengers: { target: 52000000, actual: 26000000, daily: 145000, ratio: 62.5 },
+        // Target 680k, ~82% -> 560,000
+        cargo: { target: 680000, actual: 560000, daily: 1890, ratio: 71.3 }
     },
     airportB: {
-        // Target 280k, 79% -> ~221,200
-        flights: { target: 280000, actual: 221200, daily: 780, ratio: 41.8 },
-        // Target 31M, 88% -> ~27.28M
-        passengers: { target: 31000000, actual: 27280000, daily: 86000, ratio: 37.5 },
-        // Target 275k, 76% -> ~209,000
-        cargo: { target: 275000, actual: 209000, daily: 765, ratio: 28.7 }
+        // Target 280k, ~78% -> 220,000
+        flights: { target: 280000, actual: 220000, daily: 780, ratio: 41.8 },
+        // Target 31M, ~32% -> 10,000,000
+        passengers: { target: 31000000, actual: 10000000, daily: 86000, ratio: 37.5 },
+        // Target 275k, ~51% -> 140,000
+        cargo: { target: 275000, actual: 140000, daily: 765, ratio: 28.7 }
     },
     combined: {
         // Sum of A+B
-        flights: { target: 660000, actual: 532800, daily: 1830, ratio: 100 },
-        passengers: { target: 83000000, actual: 71480000, daily: 231000, ratio: 100 },
-        cargo: { target: 955000, actual: 739400, daily: 2655, ratio: 100 }
+        flights: { target: 660000, actual: 340000, daily: 1830, ratio: 100 },
+        passengers: { target: 83000000, actual: 36000000, daily: 231000, ratio: 100 },
+        cargo: { target: 955000, actual: 700000, daily: 2655, ratio: 100 }
     }
 };
 
