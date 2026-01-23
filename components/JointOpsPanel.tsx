@@ -31,7 +31,7 @@ export const JointOpsPanel: React.FC<JointOpsPanelProps> = ({ data }) => {
             </span>
           </div>
           {/* Row 2: Labels - aligned right under their numbers */}
-          <span className={`text-sm font-bold uppercase tracking-widest text-right ${isDark ? 'text-sky-200/80' : 'text-sky-700/70'}`}>已执行总计</span>
+          <span className={`text-sm font-bold uppercase tracking-widest text-right ${isDark ? 'text-[#7DD3FC]' : 'text-sky-700/70'}`}>总执行</span>
           <span className={`text-sm font-bold uppercase tracking-widest text-right ${isDark ? 'text-white' : 'text-slate-400'}`}>总计划</span>
         </div>
       </div>

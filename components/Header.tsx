@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Sun, Moon } from 'lucide-react';
 import { useTheme } from '../ThemeContext';
 
 export const Header: React.FC = () => {
   const { isDark, toggleTheme } = useTheme();
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatTime = (date: Date) => {
+    const pad = (n: number) => n.toString().padStart(2, '0');
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
+  };
 
   return (
     <header className="w-full h-16 flex items-center justify-between px-6 z-50 flex-shrink-0 relative mt-2">
@@ -27,12 +40,12 @@ export const Header: React.FC = () => {
         </button>
         */}
 
-        <div className={`flex items-center gap-3 px-4 py-1.5 rounded-full ${isDark ? 'bg-slate-800/40' : 'glass-card'}`}>
+        <div className={`flex items-center gap-3 px-5 py-2 rounded-full ${isDark ? 'bg-slate-800/40' : 'glass-card'}`}>
           <span className="relative flex h-3 w-3">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
           </span>
-          <span className={`text-xl font-bold tech-font tracking-wide ${isDark ? 'text-white' : 'text-slate-600'}`}>2023-10-24 14:02:45</span>
+          <span className={`text-2xl font-bold font-sans tabular-nums tracking-wide ${isDark ? 'text-white' : 'text-slate-600'}`}>{formatTime(currentTime)}</span>
         </div>
       </div>
     </header>

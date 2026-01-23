@@ -132,3 +132,78 @@ export const formatMetricValue = (value: number, type: 'flights' | 'passengers' 
     // flights
     return { val: value.toString(), unit: '' };
 };
+
+// 放行看板 - 小时高峰数据接口
+export interface HourlyFlightData {
+    hour: string; // "04", "05"... "03"
+    // 离港 (Top)
+    depActual: number;
+    depPlanned: number;
+    // 进港 (Bottom)
+    arrActual: number;
+    arrPlanned: number;
+}
+
+// Mock Data Generator
+const generateHourlyData = (variant: 'A' | 'B'): HourlyFlightData[] => {
+    // 04:00 to Next Day 03:00
+    const hours = [
+        '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15',
+        '16', '17', '18', '19', '20', '21', '22', '23', '00', '01', '02', '03'
+    ];
+
+    const now = new Date();
+    let currentH = now.getHours();
+    if (currentH < 4) currentH += 24; // Adjust 0-3am to 24-27
+
+    return hours.map(h => {
+        let hVal = parseInt(h);
+        if (hVal < 4) hVal += 24;
+
+        const isFuture = hVal > currentH;
+
+        // Base traffic
+        let base = variant === 'A' ? 12 : 8; // B has less traffic
+        let peak = 0;
+
+        if (variant === 'A') {
+            // A Peaks: 08-09, 17-19
+            if (['08', '09', '10'].includes(h)) peak = 18;
+            if (['17', '18', '19'].includes(h)) peak = 15;
+            if (['01', '02', '03', '04'].includes(h)) base = 3;
+        } else {
+            // B Peaks: 10-12, 14-16 (Different pattern)
+            if (['10', '11', '12'].includes(h)) peak = 12;
+            if (['14', '15', '16'].includes(h)) peak = 10;
+            if (['01', '02', '03', '04'].includes(h)) base = 1;
+        }
+
+        const rand = Math.random() * (variant === 'A' ? 6 : 4);
+
+        const depPlanned = Math.floor(base + rand + peak + 2);
+        const arrPlanned = Math.floor(base + rand + peak + 1);
+
+        // Actuals: if future, 0. If present/past, slight variance from planned.
+        // For passed hours, Actual is close to Planned.
+        // For random feel, Actual = Planned + random(-2 to 2)
+        let depActual = 0;
+        let arrActual = 0;
+
+        if (!isFuture) { // Past or Present
+            const variance = (Math.random() - 0.4) * 4; // -1.6 to 2.4
+            depActual = Math.max(0, Math.floor(depPlanned + variance));
+            arrActual = Math.max(0, Math.floor(arrPlanned + variance));
+        }
+
+        return {
+            hour: h,
+            depActual,
+            depPlanned,
+            arrActual,
+            arrPlanned
+        };
+    });
+};
+
+export const HOURLY_FLIGHT_DATA_A: HourlyFlightData[] = generateHourlyData('B');
+export const HOURLY_FLIGHT_DATA_B: HourlyFlightData[] = generateHourlyData('A');

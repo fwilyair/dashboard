@@ -16,51 +16,6 @@ export const FluidBackground: React.FC = () => {
           className="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] bg-teal-500/10 rounded-full mix-blend-screen filter blur-[100px] animate-[float2_60s_ease-in-out_infinite]"
         />
 
-        {/* Flowing Lines SVG */}
-        <div className="absolute inset-0 opacity-30">
-          <svg
-            className="w-full h-full"
-            preserveAspectRatio="none"
-            viewBox="0 0 1440 800"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <g fill="none" strokeWidth="2">
-              <path
-                d="M-100 200 Q 300 100 720 400 T 1540 600"
-                stroke="url(#grad1)"
-                className="animate-[pulse_8s_ease-in-out_infinite]"
-                style={{ strokeDasharray: '10 10', opacity: 0.4 }}
-              />
-              <path
-                d="M-100 400 Q 400 300 720 600 T 1540 300"
-                stroke="url(#grad2)"
-                strokeWidth="1.5"
-                className="animate-[pulse_12s_ease-in-out_infinite]"
-                style={{ animationDelay: '2s', opacity: 0.3 }}
-              />
-              <path
-                d="M-100 600 Q 500 800 1000 400 T 1540 200"
-                stroke="url(#grad1)"
-                strokeWidth="1"
-                className="animate-[pulse_10s_ease-in-out_infinite]"
-                style={{ animationDelay: '4s', opacity: 0.2 }}
-              />
-            </g>
-            <defs>
-              <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#4f46e5" stopOpacity="0" />
-                <stop offset="50%" stopColor="#4f46e5" stopOpacity="0.8" />
-                <stop offset="100%" stopColor="#2dd4bf" stopOpacity="0" />
-              </linearGradient>
-              <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#2dd4bf" stopOpacity="0" />
-                <stop offset="50%" stopColor="#2dd4bf" stopOpacity="0.8" />
-                <stop offset="100%" stopColor="#4f46e5" stopOpacity="0" />
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
-
         {/* Subtle Grain Overlay */}
         <div className="absolute inset-0 opacity-[0.03] bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIi8+CjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiMwMDAiLz4KPC9zdmc+')]" />
       </div>
