@@ -113,10 +113,13 @@ const MatrixCell: React.FC<{
 
                 <style>
                     {`
-                        @keyframes waterShake {
-                            0% { background-position: calc(var(--bg-pos) - 2%) 0; }
-                            50% { background-position: calc(var(--bg-pos) + 2%) 0; }
-                            100% { background-position: calc(var(--bg-pos) - 2%) 0; }
+                        @keyframes liquidSurge {
+                            0% { background-position: calc(var(--bg-pos) - 3%) 2%; }
+                            20% { background-position: calc(var(--bg-pos) + 2%) 5%; }
+                            40% { background-position: calc(var(--bg-pos) + 4%) 0%; }
+                            60% { background-position: calc(var(--bg-pos) + 1%) -5%; }
+                            80% { background-position: calc(var(--bg-pos) - 2%) -2%; }
+                            100% { background-position: calc(var(--bg-pos) - 3%) 2%; }
                         }
                     `}
                 </style>
@@ -127,20 +130,20 @@ const MatrixCell: React.FC<{
                         style={{
                             '--bg-pos': `${100 - pct}%`,
                             backgroundImage: `
-                                linear-gradient(86deg, 
-                                    ${activeColor} 49.5%, 
+                                linear-gradient(${type === 'flights' ? 82 : (type === 'passengers' ? 88 : 85)}deg, 
+                                    ${activeColor} 45%, 
                                     rgba(255,255,255,0.8) 50%, 
-                                    ${inactiveColor} 50.5%
+                                    ${inactiveColor} 55%
                                 )
                             `,
-                            backgroundSize: '200% 100%',
+                            backgroundSize: type === 'flights' ? '240% 160%' : (type === 'passengers' ? '260% 140%' : '250% 150%'),
                             backgroundPosition: 'var(--bg-pos) 0',
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
                             backgroundClip: 'text',
                             color: 'transparent',
                             display: 'inline-block',
-                            animation: 'waterShake 2.5s ease-in-out infinite'
+                            animation: `liquidSurge ${type === 'flights' ? 5 : (type === 'passengers' ? 7 : 6)}s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite`
                         } as React.CSSProperties}
                     >
                         {yearTargetFormatted.val}
