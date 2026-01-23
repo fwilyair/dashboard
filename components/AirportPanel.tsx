@@ -33,7 +33,7 @@ export const AirportPanel: React.FC<AirportPanelProps> = ({ data, children }) =>
           </div>
         </div>
 
-        <div className="flex flex-col gap-2 py-2">
+        <div className="flex flex-col gap-2 py-0">
           <div className={`flex items-end gap-4 ${isAirportA ? 'justify-end' : 'justify-start'}`}>
             <span className={`text-8xl lg:text-9xl font-black tech-font ${themeClasses.executedText} leading-none tracking-tighter drop-shadow-pop`}>
               {data.totalFlights.executed}
@@ -55,7 +55,7 @@ export const AirportPanel: React.FC<AirportPanelProps> = ({ data, children }) =>
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-x-12 flex-1 content-start gap-y-12 py-12">
+      <div className="grid grid-cols-2 gap-x-12 flex-1 gap-y-12 pt-0 -mt-8 pb-8">
         <SmallStatCard data={data.metrics.domPax} colorTheme={data.colorTheme} align={isAirportA ? 'right' : 'left'} />
         <SmallStatCard data={data.metrics.domCgo} colorTheme={data.colorTheme} align={isAirportA ? 'right' : 'left'} />
         <SmallStatCard data={data.metrics.intPax} colorTheme={data.colorTheme} align={isAirportA ? 'right' : 'left'} />
@@ -66,15 +66,15 @@ export const AirportPanel: React.FC<AirportPanelProps> = ({ data, children }) =>
         {children ? (
           children
         ) : (
-          <div className="invisible select-none" aria-hidden="true">
-            <h3 className="text-2xl font-bold uppercase mb-6 tracking-wider">Placeholder</h3>
+          <div className="invisible select-none pb-2" aria-hidden="true">
             <div className="grid grid-cols-3 gap-8">
               <div className="flex flex-col">
-                <span className="text-xs font-bold mb-2">Spacer</span>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-5xl font-black tech-font">000</span>
+                <span className="text-2xl font-black mb-6 tracking-wider">Placeholder</span>
+                <div className="flex items-baseline gap-2 mb-3">
+                  <span className="text-5xl font-black tech-font leading-none tracking-tight">000</span>
+                  <span className="text-lg tech-font font-bold">/ 000</span>
                 </div>
-                <div className="h-2 w-full mt-3"></div>
+                <div className="h-2 w-full rounded-full bg-slate-600/50"></div>
               </div>
             </div>
           </div>

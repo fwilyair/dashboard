@@ -37,8 +37,8 @@ export const JointOpsPanel: React.FC<JointOpsPanelProps> = ({ data }) => {
       </div>
 
       {/* Gap Analysis List - Horizontal Data Layout */}
-      <div className="flex flex-col min-h-0 justify-start w-full px-2">
-        <div className="flex flex-col gap-6">
+      <div className="flex flex-col min-h-0 justify-start w-full px-8">
+        <div className="flex flex-col gap-10">
           {data.gaps.map((gap, index) => (
             <div
               key={index}
@@ -58,7 +58,8 @@ export const JointOpsPanel: React.FC<JointOpsPanelProps> = ({ data }) => {
               </div>
 
               {/* Horizontal Data Layout - Numbers only */}
-              <div className="flex items-baseline justify-end gap-10 flex-1">
+              {/* Horizontal Data Layout - Numbers only */}
+              <div className="grid grid-cols-[auto_min-content] gap-x-8 gap-y-1 justify-end justify-items-end flex-1 items-baseline">
                 {/* Executed / Planned Numbers */}
                 <div className="flex items-baseline gap-2">
                   <span className={`text-6xl font-black tech-font tracking-tighter drop-shadow-pop leading-none ${isDark ? 'text-sky-300' : 'text-sky-600'}`}>
@@ -72,6 +73,18 @@ export const JointOpsPanel: React.FC<JointOpsPanelProps> = ({ data }) => {
                 {/* Not Executed Number */}
                 <span className={`text-[30px] font-bold tech-font leading-none opacity-90 min-w-[3.5rem] text-right ${isDark ? 'text-[#FB923C]' : 'text-orange-600'}`}>
                   {Math.max(0, gap.plan - gap.act)}
+                </span>
+
+                {/* Executed / Planned Label - Color matched */}
+                <div className="flex items-center gap-1 text-xs font-bold tracking-wider">
+                  <span className={`${isDark ? 'text-sky-300' : 'text-sky-600'}`}>已执行</span>
+                  <span className={`${isDark ? 'text-white/60' : 'text-slate-400'}`}>/</span>
+                  <span className={`${isDark ? 'text-white' : 'text-slate-400'}`}>计划</span>
+                </div>
+
+                {/* Not Executed Label - Color matched */}
+                <span className={`text-xs font-bold tracking-wider text-right ${isDark ? 'text-[#FB923C]' : 'text-orange-600'}`}>
+                  待执行
                 </span>
               </div>
             </div>

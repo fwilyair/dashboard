@@ -9,38 +9,38 @@ export const OPERATIONS_DATA: OperationsPageData = {
             {
                 name: '地服代理',
                 takeoffRate: { value: 92.5 },
-                departureRate: { value: 88.3 },
-                releaseRate: { value: 95.1 },
+                departureRate: { value: 91.5 }, // Max
+                releaseRate: { value: 94.1 },
                 peakDepartureRate: { value: 85.6 },
-                cabinDoorRate: { value: 91.2 },
+                cabinDoorRate: { value: 89.5 }, // Min
                 cargoDoorRate: { value: 89.7 },
             },
             {
                 name: '地服客运',
-                takeoffRate: { value: 94.2 },
-                departureRate: { value: 90.1 },
-                releaseRate: { value: 96.8 },
-                peakDepartureRate: { value: 87.4 },
-                cabinDoorRate: { value: 93.5 },
+                takeoffRate: { value: 91.2 },
+                departureRate: { value: 89.1 },
+                releaseRate: { value: 93.8 },
+                peakDepartureRate: { value: 83.4 }, // Min
+                cabinDoorRate: { value: 94.5 }, // Max
                 cargoDoorRate: { value: 91.8 },
             },
             {
                 name: '祥鹏代理',
-                takeoffRate: { value: 89.8 },
-                departureRate: { value: 85.6 },
-                releaseRate: { value: 92.4 },
-                peakDepartureRate: { value: 82.1 },
-                cabinDoorRate: { value: 88.9 },
-                cargoDoorRate: { value: 86.3 },
+                takeoffRate: { value: 90.8 },
+                departureRate: { value: 86.6 }, // Min
+                releaseRate: { value: 97.4 }, // Max
+                peakDepartureRate: { value: 86.1 },
+                cabinDoorRate: { value: 91.9 },
+                cargoDoorRate: { value: 86.3 }, // Min
             },
             {
                 name: '东航代理',
-                takeoffRate: { value: 91.3 },
-                departureRate: { value: 87.9 },
-                releaseRate: { value: 94.2 },
-                peakDepartureRate: { value: 84.7 },
+                takeoffRate: { value: 88.5 }, // Min
+                departureRate: { value: 88.9 },
+                releaseRate: { value: 95.2 },
+                peakDepartureRate: { value: 88.7 }, // Max
                 cabinDoorRate: { value: 90.4 },
-                cargoDoorRate: { value: 88.1 },
+                cargoDoorRate: { value: 93.1 },
             },
         ],
     },
@@ -51,12 +51,12 @@ export const OPERATIONS_DATA: OperationsPageData = {
         agents: [
             {
                 name: '地服代理',
-                takeoffRate: { value: 93.1 },
-                departureRate: { value: 89.5 },
-                releaseRate: { value: 95.8 },
-                peakDepartureRate: { value: 86.2 },
+                takeoffRate: { value: 95.2 }, // Max
+                departureRate: { value: 90.5 },
+                releaseRate: { value: 92.0 }, // Min
+                peakDepartureRate: { value: 85.2 },
                 cabinDoorRate: { value: 92.1 },
-                cargoDoorRate: { value: 90.3 },
+                cargoDoorRate: { value: 93.5 }, // Max
             },
         ],
     },

@@ -42,9 +42,10 @@ const MetricValueCell: React.FC<{
         <div className="flex flex-col items-center justify-end w-full px-2">
             {/* Value Number */}
             <span
-                className={`text-4xl lg:text-5xl font-black tech-font mb-1 leading-none ${textColorClass} ${isDark ? 'drop-shadow-md' : 'drop-shadow-soft'}`}
+                className={`text-5xl lg:text-6xl font-black tech-font mb-1 leading-none ${textColorClass} ${isDark ? 'drop-shadow-md' : 'drop-shadow-soft'}`}
+                style={value === rowMax ? { animation: 'textBreathe 4s ease-in-out infinite', display: 'inline-block' } : {}}
             >
-                {value.toFixed(1)}<span className="text-2xl ml-[1px]">%</span>
+                {value.toFixed(1)}<span className="text-3xl ml-[1px]">%</span>
             </span>
 
             {/* Progress Bar */}
@@ -72,6 +73,14 @@ export const OperationsPanel: React.FC<OperationsPanelProps> = ({ data }) => {
 
     return (
         <div className="w-full h-full flex flex-col px-8">
+            <style>
+                {`
+                    @keyframes textBreathe {
+                        0%, 100% { filter: brightness(1); text-shadow: 0 0 0px transparent; }
+                        50% { filter: brightness(1.3); text-shadow: 0 0 15px rgba(251, 146, 60, 0.8); }
+                    }
+                `}
+            </style>
             {/* 顶部标题 */}
             <div className="text-center mb-6 pt-2">
                 <h2 className={`text-6xl font-black leading-none mb-2 tracking-wide ${isDark ? 'text-white' : 'text-slate-700'}`}>
