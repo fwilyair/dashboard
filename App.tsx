@@ -58,6 +58,12 @@ const App: React.FC = () => {
     handlePageTransition((currentPage - 1 + TOTAL_PAGES) % TOTAL_PAGES);
   }, [currentPage, handlePageTransition]);
 
+  // Auto carousel effect - 30 seconds
+  useEffect(() => {
+    const timer = setInterval(nextPage, 30000);
+    return () => clearInterval(timer);
+  }, [nextPage]);
+
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
