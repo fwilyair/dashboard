@@ -145,21 +145,21 @@ export const HourlyFlightChart: React.FC<HourlyFlightChartProps> = ({
                     {/* Grid Lines (Horizontal) - Dashed */}
                     <line x1={padding.left} y1={midY} x2={width - padding.right} y2={midY} stroke={isDark ? "#ffffff30" : "#00000020"} strokeWidth="1" />
 
-                    {/* Definitions for Animation */}
+                    {/* Definitions for Animation - Scoped to Title */}
                     <defs>
                         <style>
                             {`
-                                @keyframes flowAnim {
+                                @keyframes flowAnim-${title.replace(/\s+/g, '')} {
                                     0% { stroke-dashoffset: 300; opacity: 0; }
                                     2% { opacity: 1; }
                                     19% { opacity: 1; }
                                     21% { stroke-dashoffset: -1500; opacity: 0; }
                                     100% { stroke-dashoffset: -1500; opacity: 0; }
                                 }
-                                .flow-effect {
+                                .flow-effect-${title.replace(/\s+/g, '')} {
                                     stroke-dasharray: 300 3000;
                                     stroke-linecap: round;
-                                    animation: flowAnim 24s linear infinite both;
+                                    animation: flowAnim-${title.replace(/\s+/g, '')} 24s linear infinite both;
                                 }
                             `}
                         </style>
@@ -229,10 +229,10 @@ export const HourlyFlightChart: React.FC<HourlyFlightChartProps> = ({
                                 />
 
                                 {/* Dep Point */}
-                                <circle cx={x} cy={depPlanY} r={3} fill="#60a5fa" filter="url(#glow)" />
+                                <circle cx={x} cy={depPlanY} r={1.5} fill="#60a5fa" filter="url(#glow)" />
 
                                 {/* Arr Point */}
-                                <circle cx={x} cy={arrPlanY} r={3} fill="#34d399" filter="url(#glow)" />
+                                <circle cx={x} cy={arrPlanY} r={1.5} fill="#34d399" filter="url(#glow)" />
 
                                 {showXAxisLabels && (
                                     <text
@@ -252,11 +252,11 @@ export const HourlyFlightChart: React.FC<HourlyFlightChartProps> = ({
                                     {/* Dep Actual (Bar) */}
                                     {d.depActual > 0 && (
                                         <text
-                                            x={depH > 15 ? x : x - 12}
-                                            y={depH > 15 ? depY + 12 : depY + depH / 2 + 4}
-                                            textAnchor={depH > 15 ? "middle" : "end"}
-                                            fill={isDark ? "#ffffff" : (depH > 15 ? "#ffffff" : "#1e293b")}
-                                            fontSize="9"
+                                            x={depH > 22 ? x : x - 12}
+                                            y={depH > 22 ? depY + 16 : depY + depH / 2 + 5}
+                                            textAnchor={depH > 22 ? "middle" : "end"}
+                                            fill={isDark ? "#ffffff" : (depH > 22 ? "#ffffff" : "#1e293b")}
+                                            fontSize="16"
                                             fontWeight="bold"
                                             className="tech-font"
                                         >
@@ -268,10 +268,10 @@ export const HourlyFlightChart: React.FC<HourlyFlightChartProps> = ({
                                     {d.depPlanned > 0 && (
                                         <text
                                             x={x}
-                                            y={depPlanY - 8}
+                                            y={depPlanY - 12}
                                             textAnchor="middle"
                                             fill={isDark ? "#93c5fd" : "#60a5fa"}
-                                            fontSize="9"
+                                            fontSize="16"
                                             fontWeight="bold"
                                             className="tech-font"
                                         >
@@ -282,11 +282,11 @@ export const HourlyFlightChart: React.FC<HourlyFlightChartProps> = ({
                                     {/* Arr Actual (Bar) */}
                                     {d.arrActual > 0 && (
                                         <text
-                                            x={arrH > 15 ? x : x - 12}
-                                            y={arrH > 15 ? arrY + arrH - 8 : arrY + arrH / 2 + 4}
-                                            textAnchor={arrH > 15 ? "middle" : "end"}
-                                            fill={isDark ? "#ffffff" : (arrH > 15 ? "#ffffff" : "#1e293b")}
-                                            fontSize="9"
+                                            x={arrH > 22 ? x : x - 12}
+                                            y={arrH > 22 ? arrY + arrH - 12 : arrY + arrH / 2 + 5}
+                                            textAnchor={arrH > 22 ? "middle" : "end"}
+                                            fill={isDark ? "#ffffff" : (arrH > 22 ? "#ffffff" : "#1e293b")}
+                                            fontSize="16"
                                             fontWeight="bold"
                                             className="tech-font"
                                         >
@@ -298,10 +298,10 @@ export const HourlyFlightChart: React.FC<HourlyFlightChartProps> = ({
                                     {d.arrPlanned > 0 && (
                                         <text
                                             x={x}
-                                            y={arrPlanY + 15}
+                                            y={arrPlanY + 20}
                                             textAnchor="middle"
                                             fill={isDark ? "#6ee7b7" : "#34d399"}
-                                            fontSize="9"
+                                            fontSize="16"
                                             fontWeight="bold"
                                             className="tech-font"
                                         >
@@ -318,26 +318,53 @@ export const HourlyFlightChart: React.FC<HourlyFlightChartProps> = ({
                     <path d={getPathOriginal('depPlanned', -1)} fill="none" stroke="#60a5fa" strokeWidth="2" filter="url(#glow)" opacity="0.4" />
                     <path d={getPathOriginal('arrPlanned', 1)} fill="none" stroke="#34d399" strokeWidth="2" filter="url(#glow)" opacity="0.4" />
 
-                    {/* Flowing Highlight Lines */}
+                    {/* ClipPath for current hour flow limit */}
+                    <defs>
+                        <clipPath id={`clip-past-${title.replace(/\s+/g, '')}`}>
+                            <rect x="0" y="0" width={(() => {
+                                // Calculate current X position
+                                const now = new Date();
+                                let currentH = now.getHours();
+                                if (currentH < 4) currentH += 24;
+
+                                // Find index for current hour
+                                const index = data.findIndex(d => {
+                                    let h = parseInt(d.hour);
+                                    if (h < 4) h += 24;
+                                    return h === currentH;
+                                });
+
+                                // If found, clip to center of current bar. If not found (e.g. data missing), default full width
+                                // If index -1 (unlikely with 24h data), show all or none? Show all for safety.
+                                if (index === -1) return width;
+
+                                return padding.left + index * step + step / 2;
+                            })()} height={height} />
+                        </clipPath>
+                    </defs>
+
+                    {/* Flowing Highlight Lines - Clipped to Current Hour */}
                     <path
                         d={getPathOriginal('depPlanned', -1)}
                         fill="none"
                         stroke={isDark ? "#e0f2fe" : "#ffffff"}
                         strokeWidth="3"
-                        className="flow-effect"
+                        className={`flow-effect-${title.replace(/\s+/g, '')}`}
                         filter="url(#glow)"
                         opacity="1"
                         style={pathStyles.dep}
+                        clipPath={`url(#clip-past-${title.replace(/\s+/g, '')})`}
                     />
                     <path
                         d={getPathOriginal('arrPlanned', 1)}
                         fill="none"
                         stroke={isDark ? "#d1fae5" : "#ffffff"}
                         strokeWidth="3"
-                        className="flow-effect"
+                        className={`flow-effect-${title.replace(/\s+/g, '')}`}
                         filter="url(#glow)"
                         opacity="1"
                         style={pathStyles.arr}
+                        clipPath={`url(#clip-past-${title.replace(/\s+/g, '')})`}
                     />
 
                 </svg>

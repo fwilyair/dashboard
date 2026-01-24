@@ -29,7 +29,7 @@ export const Header: React.FC = () => {
       <div className="flex items-center gap-4">
         {/* Theme Toggle Button - Hidden ... */}
 
-        <div className={`flex items-center gap-3 px-5 py-2 rounded-full ${isDark ? 'bg-slate-800/40' : 'glass-card'}`}>
+        <div className="flex items-center gap-3">
           <span className={`text-2xl font-bold font-mono tabular-nums tracking-wide ${isDark ? 'text-white' : 'text-slate-600'}`}>{formatTime(currentTime)}</span>
         </div>
       </div>

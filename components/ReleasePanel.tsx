@@ -50,8 +50,8 @@ export const ReleasePanel: React.FC = () => {
                 </div>
 
                 {/* Shared Time Axis */}
-                <div className="h-6 flex-shrink-0 w-full select-none">
-                    <svg viewBox="0 0 1200 30" preserveAspectRatio="none" className="w-full h-full">
+                <div className="h-10 flex-shrink-0 w-full select-none">
+                    <svg viewBox="0 0 1200 40" preserveAspectRatio="none" className="w-full h-full">
                         {HOURLY_FLIGHT_DATA_A.map((d, i) => {
                             const width = 1200;
                             const padding = { left: 40, right: 40 };
@@ -68,10 +68,10 @@ export const ReleasePanel: React.FC = () => {
 
                             return (
                                 <text
-                                    key={i} x={x} y={20}
+                                    key={i} x={x} y={28}
                                     textAnchor="middle"
                                     fill={isPast ? (isDark ? "#ffffff" : "#000000") : (isDark ? "#64748b" : "#94a3b8")}
-                                    fontSize="14"
+                                    fontSize="24"
                                     fontWeight={isPast ? "bold" : "normal"}
                                     className="tech-font"
                                     style={{ fontFamily: 'Rajdhani, sans-serif' }}
