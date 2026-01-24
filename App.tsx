@@ -102,19 +102,29 @@ const App: React.FC = () => {
         {/* Bottom Alignment Decoration Line */}
         <div className={`w-full h-[2px] mt-2 bg-gradient-to-r from-transparent to-transparent shrink-0 ${isDark ? 'via-slate-600 opacity-50' : 'via-slate-300 opacity-60'}`}></div>
 
-        {/* Page Indicator - Clickable */}
-        <div className="flex justify-center items-center gap-3 mt-3">
-          {[0, 1, 2, 3].map((index) => (
-            <button
-              key={index}
-              onClick={() => goToPage(index)}
-              className={`h-3 rounded-full transition-all duration-300 cursor-pointer ${currentPage === index
-                ? (isDark ? 'bg-sky-400 w-8' : 'bg-sky-600 w-8')
-                : (isDark ? 'bg-slate-600 w-3' : 'bg-slate-300 w-3')
-                }`}
-              aria-label={`Switch to ${index === 0 ? 'Situation' : index === 1 ? 'Target' : index === 2 ? 'Operation' : 'Release'}`}
-            />
-          ))}
+        {/* Page Indicator - Liquid Glass Style (No Background) */}
+        <div className="flex justify-center items-center mt-3 mb-1">
+          <div className="flex items-center gap-4 px-6 py-3 rounded-full transition-all duration-500">
+            {[0, 1, 2, 3].map((index) => (
+              <button
+                key={index}
+                onClick={() => goToPage(index)}
+                className={`
+                  relative rounded-full transition-all duration-[1500ms] cubic-bezier(0.25, 0.8, 0.25, 1) cursor-pointer overflow-hidden
+                  ${currentPage === index
+                    ? 'w-8 h-3 bg-gradient-to-br from-sky-400 to-blue-600 shadow-[inset_0_1px_1px_rgba(255,255,255,0.6)] drop-shadow-[0_0_8px_rgba(14,165,233,0.6)]'
+                    : `w-3 h-3 hover:scale-125 ${isDark ? 'bg-white/20 hover:bg-white/40' : 'bg-slate-400/30 hover:bg-slate-400/50'}`
+                  }
+                `}
+                aria-label={`Switch to page ${index + 1}`}
+              >
+                {/* Liquid Glare Effect for Active State */}
+                {currentPage === index && (
+                  <div className="absolute top-[1px] left-[2px] right-[2px] h-[40%] bg-gradient-to-b from-white/80 to-transparent rounded-full opacity-60"></div>
+                )}
+              </button>
+            ))}
+          </div>
           <span className={`ml-4 text-xs font-medium ${isDark ? 'text-slate-500' : 'text-slate-400'} hidden`}>
             ← → 键盘切换
           </span>
