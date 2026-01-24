@@ -17,23 +17,49 @@ const App: React.FC = () => {
   const { isDark } = useTheme();
   const [currentPage, setCurrentPage] = useState(0);
 
+  // Transition State
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [transitionStage, setTransitionStage] = useState<'idle' | 'in' | 'out'>('idle');
+
+  // Handle Page Transition Sequence
+  const handlePageTransition = useCallback((targetPage: number) => {
+    if (isTransitioning || targetPage === currentPage) return;
+
+    // Start Transition (In)
+    setIsTransitioning(true);
+    setTransitionStage('in');
+
+    // Wait for cover (800ms match CSS)
+    setTimeout(() => {
+      setCurrentPage(targetPage);
+      setTransitionStage('out');
+
+      // Wait for reveal (800ms match CSS)
+      setTimeout(() => {
+        setTransitionStage('idle');
+        setIsTransitioning(false);
+      }, 800);
+    }, 800);
+  }, [currentPage, isTransitioning]);
+
   // Navigate to specific page
   const goToPage = useCallback((page: number) => {
-    setCurrentPage(page);
-  }, []);
+    handlePageTransition(page);
+  }, [handlePageTransition]);
 
   // Navigate to next/prev page
   const nextPage = useCallback(() => {
-    setCurrentPage(prev => (prev + 1) % TOTAL_PAGES);
-  }, []);
+    handlePageTransition((currentPage + 1) % TOTAL_PAGES);
+  }, [currentPage, handlePageTransition]);
 
   const prevPage = useCallback(() => {
-    setCurrentPage(prev => (prev - 1 + TOTAL_PAGES) % TOTAL_PAGES);
-  }, []);
+    handlePageTransition((currentPage - 1 + TOTAL_PAGES) % TOTAL_PAGES);
+  }, [currentPage, handlePageTransition]);
 
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (isTransitioning) return; // Block input during transition
       if (e.key === 'ArrowRight') {
         nextPage();
       } else if (e.key === 'ArrowLeft') {
@@ -43,16 +69,21 @@ const App: React.FC = () => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [nextPage, prevPage]);
-
-  // Auto carousel effect - DISABLED
-  // useEffect(() => {
-  //   const timer = setInterval(nextPage, CAROUSEL_INTERVAL);
-  //   return () => clearInterval(timer);
-  // }, [nextPage]);
+  }, [nextPage, prevPage, isTransitioning]);
 
   return (
     <div className={`h-screen w-screen flex flex-col relative overflow-hidden ${isDark ? 'text-white' : 'text-slate-700'}`}>
+
+      {/* Transition Overlay - Fade Out / Fade In */}
+      <div
+        className={`fixed inset-0 z-50 pointer-events-none bg-slate-900 transition-opacity duration-[800ms] ease-in-out`}
+        style={{
+          opacity: transitionStage === 'in' ? 1 : 0,
+          visibility: transitionStage === 'idle' ? 'hidden' : 'visible',
+        }}
+      >
+      </div>
+
       {/* Dynamic Background */}
       <FluidBackground />
 
@@ -64,7 +95,7 @@ const App: React.FC = () => {
 
         {/* Page 0: Situation */}
         {currentPage === 0 && (
-          <div className="grid grid-cols-12 gap-3 flex-1 min-h-0">
+          <div className="grid grid-cols-12 gap-3 flex-1 min-h-0 animate-in fade-in zoom-in-95 duration-500">
             {/* Left Column: Airport A */}
             <AirportPanel data={AIRPORT_A_DATA}>
               <AirportAFooter />
@@ -80,21 +111,21 @@ const App: React.FC = () => {
 
         {/* Page 1: Target */}
         {currentPage === 1 && (
-          <div className="flex-1 min-h-0">
+          <div className="flex-1 min-h-0 animate-in fade-in zoom-in-95 duration-500">
             <OperationsPanel data={OPERATIONS_DATA} />
           </div>
         )}
 
         {/* Page 2: Operation */}
         {currentPage === 2 && (
-          <div className="flex-1 min-h-0">
+          <div className="flex-1 min-h-0 animate-in fade-in zoom-in-95 duration-500">
             <OperationPanel />
           </div>
         )}
 
         {/* Page 3: Release */}
         {currentPage === 3 && (
-          <div className="flex-1 min-h-0">
+          <div className="flex-1 min-h-0 animate-in fade-in zoom-in-95 duration-500">
             <ReleasePanel />
           </div>
         )}
