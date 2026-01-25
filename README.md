@@ -1,51 +1,51 @@
-# Dual Airport Command Dashboard (v1.1)
+# 地服公司两场生产运行态势 (Dual Airport Command Dashboard v1.1)
 
-A next-generation situational awareness dashboard designed for dual-airport joint operations command. This project emphasizes high-performance rendering, a "Deep Tech" aesthetic, and responsive data visualization.
+专为双机场联合运行指挥设计的下一代态势感知大屏。本项目强调高性能渲染、"深空科技 (Deep Tech)" 美学以及响应式数据可视化。
 
 ![Dashboard Preview](./screenshot.png)
-*(Please add a screenshot of the dashboard here)*
+*(此处可替换为项目截图)*
 
-## 🎨 Visual Style: Ghostly Animated Deep Tech Hills
+## 🎨 视觉风格: 幽灵态深空山峦 (Ghostly Animated Deep Tech Hills)
 
-The v1.1 update introduces a completely redesigned visual system:
+v1.1 版本引入以此全新的视觉系统，打造沉浸式指挥体验：
 
-- **Palette**: **Monochromatic Cool Tones** (Slate / Indigo / Blue). A strictly controlled cool color temperature ensures a professional, calm command center atmosphere.
-- **Background System**: 
-  - **Solid Stacked SVG**: Uses solid geometry instead of gradients to create disjointed, sharp "hill" layers.
-  - **Ghostly Opacity**: Layers are rendered at ~20% opacity with a global dark overlay, behaving like a subtle radar ghosting effect rather than a decorative wallpaper.
-  - **Organic Motion**: Each layer features independent `swell` animations (10s-15s cycles) and `feathered` edges (8px blur) for a breathing, organic feel.
-  - **Color Shifting**: Background colors slowly cycle through the Deep Tech spectrum (Slate -> Indigo -> Violet -> Cyan) over 30-60s intervals, ensuring the display never looks static.
-  - **Full Coverage**: A dynamic base layer ensures 100% screen coverage without dead zones, regardless of aspect ratio.
+- **色调 (Palette)**: 严格控制的 **冷色调单色系** (Slate / Indigo / Blue)，营造冷静、专业的指挥中心氛围。
+- **背景系统 (Background System)**:
+  - **实心堆叠 SVG (Solid Stacked SVG)**: 摒弃传统渐变，采用分层明确的实心几何山峦。
+  - **幽灵透明度 (Ghostly Opacity)**: 整体层级控制在 ~20% 透明度并叠加全局暗色遮罩，呈现出如雷达余辉般的隐约质感。
+  - **有机律动 (Organic Motion)**: 每一层山峦都拥有独立的 `swell` (呼吸起伏) 动画 (10s-15s 周期) 和 `feathered` (8px 羽化) 边缘。
+  - **颜色流变 (Color Shifting)**: 背景颜色会在深空光谱 (深岩灰 -> 靛蓝 -> 紫罗兰 -> 暗青) 间以 30s-60s 的周期缓慢循环，确保画面生生不息。
+  - **全屏覆盖 (Full Coverage)**: 最底层引入动态基底，确保无论屏幕比例如何，背景永远100%覆盖无死角。
 
-## 🛠️ Tech Stack
+## 🛠️ 技术栈 (Tech Stack)
 
-Built with a modern, high-performance frontend stack:
+基于现代高性能前端技术构建：
 
-- **Core**: [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
-- **Build System**: [Vite](https://vitejs.dev/)
-- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
-- **Icons**: [Lucide React](https://lucide.dev/)
-- **Charts**: [Recharts](https://recharts.org/)
-- **Testing**: [Vitest](https://vitest.dev/) + React Testing Library
+- **核心**: [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- **构建**: [Vite](https://vitejs.dev/)
+- **样式**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **图标**: [Lucide React](https://lucide.dev/)
+- **图表**: [Recharts](https://recharts.org/)
+- **测试**: [Vitest](https://vitest.dev/) + React Testing Library
 
-## 🚀 Getting Started
+## 🚀 快速开始
 
 ```bash
-# Install dependencies
+# 安装依赖
 npm install
 
-# Start development server
+# 启动开发服务器
 npm run dev
 
-# Build for production
+# 生产环境构建
 npm run build
 ```
 
-## 📂 Project Structure
+## 📂 项目结构
 
-- `components/FluidBackground.tsx`: The core visual engine for the animated background.
-- `components/*Panel.tsx`: Feature-specific data panels (Airport A, Airport B, Joint Ops, etc.).
-- `App.tsx`: Main layout manager handling the "Liquid Pagination" transitions.
+- `components/FluidBackground.tsx`: 动态背景的核心视觉引擎。
+- `components/*Panel.tsx`: 业务数据面板 (A机场, B机场, 联合运行等)。
+- `App.tsx`: 主布局管理器，处理 "液态分页 (Liquid Pagination)" 转场。
 
 ---
 *Designed for ultra-wide command center displays.*
