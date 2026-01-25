@@ -249,15 +249,15 @@ export const OperationPanel: React.FC = () => {
             <div className="flex-1 grid grid-cols-[auto_1fr_1fr_1fr] gap-x-8 gap-y-8 min-h-0">
 
                 {/* --- Row 1 Header (Airports) --- Swapped colors: A=emerald, B=sky */}
-                <div className="col-start-2 flex items-center gap-4 border-b border-white/5 pb-2">
+                <div className={`col-start-2 flex items-center gap-4 border-b pb-2 ${isDark ? 'border-white/5' : 'border-slate-200'}`}>
                     <div className="w-2 h-10 rounded-full bg-emerald-500"></div>
                     <h3 className={`text-5xl font-black ${headerTextColor}`}>A机场</h3>
                 </div>
-                <div className="col-start-3 flex items-center gap-4 border-b border-white/5 pb-2">
+                <div className={`col-start-3 flex items-center gap-4 border-b pb-2 ${isDark ? 'border-white/5' : 'border-slate-200'}`}>
                     <div className="w-2 h-10 rounded-full bg-indigo-500"></div>
                     <h3 className={`text-5xl font-black ${headerTextColor}`}>B机场</h3>
                 </div>
-                <div className="col-start-4 flex items-center gap-4 border-b border-white/5 pb-2">
+                <div className={`col-start-4 flex items-center gap-4 border-b pb-2 ${isDark ? 'border-white/5' : 'border-slate-200'}`}>
                     <div className="w-2 h-10 rounded-full bg-amber-500"></div>
                     <h3 className={`text-5xl font-black ${headerTextColor}`}>两场合计</h3>
                 </div>
@@ -265,7 +265,7 @@ export const OperationPanel: React.FC = () => {
 
                 {/* --- Row 2: Flights --- */}
                 {/* Label with Unit */}
-                <div className="flex items-center justify-end px-4 border-r border-white/[0.02]">
+                <div className={`flex items-center justify-end px-4 border-r ${isDark ? 'border-white/[0.02]' : 'border-slate-200/50'}`}>
                     <div className="flex items-baseline gap-2">
                         <span className={`text-4xl font-black ${isDark ? 'text-white' : 'text-slate-700'}`}>
                             航班架次
@@ -283,7 +283,7 @@ export const OperationPanel: React.FC = () => {
 
                 {/* --- Row 3: Passengers --- */}
                 {/* Label with Unit */}
-                <div className="flex items-center justify-end px-4 border-r border-white/[0.02]">
+                <div className={`flex items-center justify-end px-4 border-r ${isDark ? 'border-white/[0.02]' : 'border-slate-200/50'}`}>
                     <div className="flex items-baseline gap-2">
                         <span className={`text-4xl font-black ${isDark ? 'text-white' : 'text-slate-700'}`}>
                             旅客吞吐量
@@ -301,7 +301,7 @@ export const OperationPanel: React.FC = () => {
 
                 {/* --- Row 4: Cargo --- */}
                 {/* Label with Unit */}
-                <div className="flex items-center justify-end px-4 border-r border-white/[0.02]">
+                <div className={`flex items-center justify-end px-4 border-r ${isDark ? 'border-white/[0.02]' : 'border-slate-200/50'}`}>
                     <div className="flex items-baseline gap-2">
                         <span className={`text-4xl font-black ${isDark ? 'text-white' : 'text-slate-700'}`}>
                             货邮吞吐量

@@ -142,8 +142,7 @@ const App: React.FC = () => {
                 </div>
               )}
 
-              {/* Bottom Alignment Decoration Line */}
-              <div className={`w-full h-[2px] mt-2 bg-gradient-to-r from-transparent to-transparent shrink-0 ${isDark ? 'via-slate-600 opacity-50' : 'via-slate-300 opacity-60'}`}></div>
+
 
               {/* Page Indicator - Liquid Glass Style (No Background) */}
               <div className="flex justify-center items-center mt-3 mb-1">

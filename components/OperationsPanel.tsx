@@ -113,7 +113,7 @@ export const OperationsPanel: React.FC<OperationsPanelProps> = ({ data }) => {
             <div className="flex-1 min-h-0 flex flex-col pb-4">
 
                 {/* Header Row */}
-                <div className="flex items-end pb-2 border-b border-white/10 mb-2"> {/* Reduced pb-6 to pb-2 */}
+                <div className={`flex items-end pb-2 border-b mb-2 ${isDark ? 'border-white/10' : 'border-slate-200'}`}> {/* Reduced pb-6 to pb-2 */}
                     <div className="w-[320px] flex-shrink-0"></div>
 
                     {/* A 机场 Header */}
@@ -171,7 +171,7 @@ export const OperationsPanel: React.FC<OperationsPanelProps> = ({ data }) => {
                         const rowMin = Math.min(...rowVals);
 
                         return (
-                            <div key={key} className="flex-1 flex items-end border-b border-white/5 last:border-0 pb-2">
+                            <div key={key} className={`flex-1 flex items-end border-b last:border-0 pb-2 ${isDark ? 'border-white/5' : 'border-slate-200'}`}>
 
                                 {/* Label Column - Changed to White - Right Aligned */}
                                 <div className="w-[320px] flex-shrink-0 pr-10 mb-[2px] text-right">

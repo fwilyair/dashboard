@@ -131,7 +131,7 @@ export const AirportPanel: React.FC<AirportPanelProps> = ({ data, children }) =>
                   <span className="text-5xl font-black tech-font leading-none tracking-tight">000</span>
                   <span className="text-lg tech-font font-bold">/ 000</span>
                 </div>
-                <div className="h-2 w-full rounded-full bg-slate-600/50"></div>
+                <div className={`h-2 w-full rounded-full ${isDark ? 'bg-slate-600/50' : 'bg-slate-300'}`}></div>
               </div>
             </div>
           </div>
