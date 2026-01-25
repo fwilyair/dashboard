@@ -27,7 +27,17 @@ export const Header: React.FC = () => {
         </div>
       </div>
       <div className="flex items-center gap-4">
-        {/* Theme Toggle Button - Hidden ... */}
+        {/* Theme Toggle Button */}
+        <button
+          onClick={toggleTheme}
+          className={`p-2 rounded-full transition-colors ${isDark
+              ? 'bg-slate-800 text-yellow-400 hover:bg-slate-700'
+              : 'bg-white text-slate-700 hover:bg-slate-100 shadow-sm border border-slate-200'
+            }`}
+          aria-label="Toggle Theme"
+        >
+          {isDark ? <Sun size={20} /> : <Moon size={20} />}
+        </button>
 
         <div className="flex items-center gap-3">
           <span className={`text-2xl font-bold font-mono tabular-nums tracking-wide ${isDark ? 'text-white' : 'text-slate-600'}`}>{formatTime(currentTime)}</span>

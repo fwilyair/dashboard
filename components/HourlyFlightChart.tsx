@@ -347,7 +347,7 @@ export const HourlyFlightChart: React.FC<HourlyFlightChartProps> = ({
                     <path
                         d={getPathOriginal('depPlanned', -1)}
                         fill="none"
-                        stroke={isDark ? "#e0f2fe" : "#ffffff"}
+                        stroke={isDark ? "#e0f2fe" : "#60a5fa"}
                         strokeWidth="3"
                         className={`flow-effect-${title.replace(/\s+/g, '')}`}
                         filter="url(#glow)"
@@ -358,7 +358,7 @@ export const HourlyFlightChart: React.FC<HourlyFlightChartProps> = ({
                     <path
                         d={getPathOriginal('arrPlanned', 1)}
                         fill="none"
-                        stroke={isDark ? "#d1fae5" : "#ffffff"}
+                        stroke={isDark ? "#d1fae5" : "#34d399"}
                         strokeWidth="3"
                         className={`flow-effect-${title.replace(/\s+/g, '')}`}
                         filter="url(#glow)"
