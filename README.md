@@ -1,96 +1,51 @@
-# 双机场指挥看板 (Dual Airport Command Dashboard)
+# Dual Airport Command Dashboard (v1.1)
 
-![Dashboard Preview](https://via.placeholder.com/1920x1080?text=Dual+Airport+Dashboard+Preview)
+A next-generation situational awareness dashboard designed for dual-airport joint operations command. This project emphasizes high-performance rendering, a "Deep Tech" aesthetic, and responsive data visualization.
 
-基于 React + Vite + TailwindCSS 构建的现代化机场运行指挥大屏。专为高分辨率指挥中心大屏设计，支持 1080P/2K/4K 自适应显示，提供流畅的视觉体验和实时数据展示。
+![Dashboard Preview](./screenshot.png)
+*(Please add a screenshot of the dashboard here)*
 
-## 🚀 功能特性
+## 🎨 Visual Style: Ghostly Animated Deep Tech Hills
 
-### 1. 核心大屏功能
-*   **多维度数据展示**：支持 A/B 双机场数据并列展示，包括放行正常率、起降架次、延误情况等关键指标。
-*   **四页自动轮播**：
-    1.  **综合态势页**：双机场核心指标概览。
-    2.  **指标详情页**：各类运行效率指标的深度分析。
-    3.  **放行监控页**：实时的航班放行状态监控。
-    4.  **运行协同页**：联合运行控制相关的协同数据。
-*   **自动翻页**：每 30 秒自动切换页面，支持手动暂停/切换。
-*   **16:9 自适应适配**：内置 `ResponsiveWrapper`，确保在任意分辨率屏幕上保持标准的 16:9 比例，自动缩放不失真。
+The v1.1 update introduces a completely redesigned visual system:
 
-### 2. 极致视觉体验
-*   **流体背景动画**：采用 Apple Big Sur 风格的动态流体背景，色彩柔和且富有生机。
-*   **高级转场特效**：页面切换采用 1.6 秒（800ms 淡出 + 800ms 淡入）的 "Dip to Black" 电影级转场，消除视觉顿挫感。
-*   **精美 UI 组件**：
-    *   **液态指示器**：底部页码指示器具有液态玻璃质感和流光特效。
-    *   **动态图表**：使用 Recharts 绘制的平滑曲线图，支持渐变填充。
-    *   **暗色模式优化**：深色背景专为指挥中心低光环境设计，减少视觉疲劳。
+- **Palette**: **Monochromatic Cool Tones** (Slate / Indigo / Blue). A strictly controlled cool color temperature ensures a professional, calm command center atmosphere.
+- **Background System**: 
+  - **Solid Stacked SVG**: Uses solid geometry instead of gradients to create disjointed, sharp "hill" layers.
+  - **Ghostly Opacity**: Layers are rendered at ~20% opacity with a global dark overlay, behaving like a subtle radar ghosting effect rather than a decorative wallpaper.
+  - **Organic Motion**: Each layer features independent `swell` animations (10s-15s cycles) and `feathered` edges (8px blur) for a breathing, organic feel.
+  - **Color Shifting**: Background colors slowly cycle through the Deep Tech spectrum (Slate -> Indigo -> Violet -> Cyan) over 30-60s intervals, ensuring the display never looks static.
+  - **Full Coverage**: A dynamic base layer ensures 100% screen coverage without dead zones, regardless of aspect ratio.
 
-### 3. 技术栈
-*   **React 18**：核心 UI 框架。
-*   **Vite**：极速构建工具。
-*   **TailwindCSS**：原子化 CSS 样式引擎。
-*   **Recharts**：可视化图表库。
-*   **Vitest**：单元测试与组件测试。
-*   **TypeScript**：全类型安全开发。
+## 🛠️ Tech Stack
 
-## 🛠️ 安装与运行
+Built with a modern, high-performance frontend stack:
 
-### 环境要求
-*   Node.js >= 18
-*   npm >= 9
+- **Core**: [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- **Build System**: [Vite](https://vitejs.dev/)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Charts**: [Recharts](https://recharts.org/)
+- **Testing**: [Vitest](https://vitest.dev/) + React Testing Library
 
-### 本地开发
+## 🚀 Getting Started
 
 ```bash
-# 克隆项目
-git clone https://github.com/fwilyair/dashboard.git
-
-# 安装依赖
+# Install dependencies
 npm install
 
-# 启动开发服务器 (默认端口 3000)
+# Start development server
 npm run dev
-```
 
-### 构建部署
-
-```bash
-# 构建生产环境代码
+# Build for production
 npm run build
-
-# 预览构建结果
-npm run preview
 ```
 
-### 运行测试
+## 📂 Project Structure
 
-```bash
-# 运行所有测试用例
-npm run test
-```
+- `components/FluidBackground.tsx`: The core visual engine for the animated background.
+- `components/*Panel.tsx`: Feature-specific data panels (Airport A, Airport B, Joint Ops, etc.).
+- `App.tsx`: Main layout manager handling the "Liquid Pagination" transitions.
 
-## 📂 项目结构
-
-```
-src/
-├── components/         # UI 组件
-│   ├── AirportPanel.tsx    # 机场数据面板
-│   ├── FluidBackground.tsx # 动态背景
-│   ├── ResponsiveWrapper.tsx # 16:9 自适应容器
-│   └── ...
-├── lib/                # 工具函数
-├── constants.ts        # 静态数据定义
-├── App.tsx             # 主应用入口 (包含转场与轮播逻辑)
-└── ...
-```
-
-## 📝 版本历史
-
-### v1.0.0 (Current)
-*   ✅ 完成所有核心页面开发。
-*   ✅ 实现 16:9 全屏自适应。
-*   ✅ 优化 Fade Out / Fade In 转场动画。
-*   ✅ 启用 30秒自动轮播。
-*   ✅ 集成前端测试环境。
-
-## 📄 License
-MIT
+---
+*Designed for ultra-wide command center displays.*

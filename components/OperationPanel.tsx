@@ -128,7 +128,7 @@ const MatrixCell: React.FC<{
                     <span
                         className="text-7xl lg:text-8xl font-black tech-font tracking-tight leading-none italic pr-4"
                         style={{
-                            '--bg-pos': `${100 - pct}%`,
+                            '--bg-pos': `${100 - parseFloat(pct)}%`,
                             backgroundImage: `
                                 linear-gradient(${type === 'flights' ? 82 : (type === 'passengers' ? 88 : 85)}deg, 
                                     ${activeColor} 45%, 

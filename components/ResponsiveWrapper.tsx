@@ -9,51 +9,52 @@ export const ResponsiveWrapper: React.FC<ResponsiveWrapperProps> = ({ children }
     const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        let rafId: number;
+
         const handleResize = () => {
-            // Target design resolution
-            const targetWidth = 1920;
-            const targetHeight = 1080;
+            // Wrap in rAF to prevent thrashing
+            rafId = requestAnimationFrame(() => {
+                // Target design resolution
+                const targetWidth = 1920;
+                const targetHeight = 1080;
 
-            // Current window resolution
-            const currentWidth = window.innerWidth;
-            const currentHeight = window.innerHeight;
+                // Current window resolution
+                const currentWidth = window.innerWidth;
+                const currentHeight = window.innerHeight;
 
-            // Calculate scale based on width (prioritize width to fit content horizontally)
-            // or use Math.min for contain-style fitting
+                // Calculate scale
+                const scaleX = currentWidth / targetWidth;
+                const scaleY = currentHeight / targetHeight;
 
-            // Strictly scale to fit width for standard dashboard usage
-            // But user asked for 16:9 self-adaptation. 
-            // Often dashboards are fixed 1920x1080 and scaled to fit the screen.
+                // Use the smaller scale factor (contain)
+                const newScale = Math.min(scaleX, scaleY);
 
-            const scaleX = currentWidth / targetWidth;
-            const scaleY = currentHeight / targetHeight;
-
-            // Use the smaller scale factor to ensure it fits completely (contain)
-            // Or use scaleX to Fill Width if vertical scroll is allowed
-            // Given "Command Dashboard", usually it's "fit screen without scroll".
-
-            const newScale = Math.min(scaleX, scaleY);
-
-            setScale(newScale);
+                setScale(newScale);
+            });
         };
 
         window.addEventListener('resize', handleResize);
         handleResize(); // Initial calculation
 
-        return () => window.removeEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+            cancelAnimationFrame(rafId);
+        };
     }, []);
+
+    const containerStyle = React.useMemo(() => ({
+        width: '1920px',
+        height: '1080px',
+        transform: `scale(${scale})`,
+        transformOrigin: 'center center',
+    }), [scale]);
 
     return (
         <div
             className="w-screen h-screen overflow-hidden bg-black flex items-center justify-center"
         >
             <div
-                style={{
-                    width: '1920px',
-                    height: '1080px',
-                    transform: `scale(${scale})`,
-                    transformOrigin: 'center center',
-                }}
+                style={containerStyle}
                 className="relative shadow-2xl overflow-hidden"
             >
                 {children}
