@@ -51,7 +51,7 @@ export const ResponsiveWrapper: React.FC<ResponsiveWrapperProps> = ({ children }
 
     return (
         <div
-            className="w-screen h-screen overflow-hidden bg-black flex items-center justify-center"
+            className="w-screen h-screen overflow-hidden bg-slate-950 flex items-center justify-center"
         >
             <div
                 style={containerStyle}

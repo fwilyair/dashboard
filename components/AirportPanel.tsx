@@ -13,14 +13,15 @@ export const AirportPanel: React.FC<AirportPanelProps> = ({ data, children }) =>
   const isTeal = data.colorTheme === 'teal';
   const isAirportA = data.id === 'A';
 
+  /* UI/UX Pro Max: High Contrast & Rich Gradients */
   const themeClasses = {
-    title: isTeal ? 'text-teal-700' : 'text-indigo-700',
+    title: isTeal ? 'text-teal-800' : 'text-indigo-800', // Darker for title
     barGradient: isTeal
-      ? (isDark ? 'from-teal-500 to-teal-300' : 'from-teal-600 to-teal-400')
-      : (isDark ? 'from-indigo-500 to-indigo-300' : 'from-indigo-600 to-indigo-400'),
+      ? (isDark ? 'from-teal-500 to-teal-300' : 'from-teal-600 to-teal-500') // Richer light mode gradient
+      : (isDark ? 'from-indigo-500 to-indigo-300' : 'from-indigo-600 to-indigo-500'),
     executedText: isDark
       ? (isTeal ? 'text-teal-300' : 'text-indigo-300')
-      : (isTeal ? 'text-teal-600' : 'text-indigo-600'),
+      : (isTeal ? 'text-teal-700' : 'text-indigo-700'), // Darker for readability
   };
 
   const liquidStyle: React.CSSProperties = {

@@ -12,16 +12,16 @@ const MatrixCell: React.FC<{
 
     const colors = {
         indigo: {
-            primary: isDark ? 'text-indigo-300' : 'text-indigo-600',
-            bar: isDark ? 'from-indigo-500 to-indigo-300' : 'from-indigo-600 to-indigo-400',
+            primary: isDark ? 'text-indigo-300' : 'text-indigo-700', // Darker for light mode
+            bar: isDark ? 'from-indigo-500 to-indigo-300' : 'from-indigo-600 to-indigo-500', // Richer gradient
         },
         emerald: {
-            primary: isDark ? 'text-emerald-300' : 'text-emerald-600',
-            bar: isDark ? 'from-emerald-500 to-emerald-300' : 'from-emerald-600 to-emerald-400',
+            primary: isDark ? 'text-emerald-300' : 'text-emerald-700', // Darker for light mode
+            bar: isDark ? 'from-emerald-500 to-emerald-300' : 'from-emerald-600 to-emerald-500', // Richer gradient
         },
         amber: {
-            primary: isDark ? 'text-amber-300' : 'text-amber-600',
-            bar: isDark ? 'from-amber-500 to-amber-300' : 'from-amber-600 to-amber-400',
+            primary: isDark ? 'text-amber-300' : 'text-amber-700', // Darker for light mode
+            bar: isDark ? 'from-amber-500 to-amber-300' : 'from-amber-600 to-amber-500', // Richer gradient
         },
     };
 

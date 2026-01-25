@@ -18,19 +18,19 @@ export const ReleasePanel: React.FC = () => {
                 <div className="flex items-center justify-center gap-8 mt-4 text-sm font-bold">
                     <div className="flex items-center gap-2">
                         <div className="w-3 h-3 rounded-full bg-blue-500"></div>
-                        <span className={`${isDark ? 'text-white' : 'text-blue-600'}`}>计划离港</span>
+                        <span className={`${isDark ? 'text-white' : 'text-blue-700'}`}>计划离港</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <div className="w-3 h-3 bg-blue-600/60 rounded-sm"></div>
-                        <span className={`${isDark ? 'text-white' : 'text-blue-700'}`}>实际离港</span>
+                        <span className={`${isDark ? 'text-white' : 'text-blue-800'}`}>实际离港</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <div className="w-3 h-3 rounded-full bg-emerald-500"></div>
-                        <span className={`${isDark ? 'text-white' : 'text-emerald-600'}`}>计划进港</span>
+                        <span className={`${isDark ? 'text-white' : 'text-emerald-700'}`}>计划进港</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <div className="w-3 h-3 bg-emerald-600/60 rounded-sm"></div>
-                        <span className={`${isDark ? 'text-white' : 'text-emerald-700'}`}>实际进港</span>
+                        <span className={`${isDark ? 'text-white' : 'text-emerald-800'}`}>实际进港</span>
                     </div>
                 </div>
             </div>

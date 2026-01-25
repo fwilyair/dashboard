@@ -23,7 +23,7 @@ export const Header: React.FC = () => {
       <div className="flex items-center gap-4">
         {/* Removed Icon */}
         <div>
-          <h1 className={`text-3xl font-black tracking-tight leading-tight ${isDark ? 'text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]' : 'text-slate-700 drop-shadow-soft'}`}>地服公司两场生产运行态势</h1>
+          <h1 className={`text-3xl font-black tracking-tight leading-tight ${isDark ? 'text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]' : 'text-slate-800 drop-shadow-soft'}`}>地服公司两场生产运行态势</h1>
         </div>
       </div>
       <div className="flex items-center gap-4">
@@ -31,8 +31,8 @@ export const Header: React.FC = () => {
         <button
           onClick={toggleTheme}
           className={`p-2 rounded-full transition-colors ${isDark
-              ? 'bg-slate-800 text-yellow-400 hover:bg-slate-700'
-              : 'bg-white text-slate-700 hover:bg-slate-100 shadow-sm border border-slate-200'
+            ? 'bg-slate-800 text-yellow-400 hover:bg-slate-700'
+            : 'bg-white text-slate-700 hover:bg-slate-100 shadow-sm border border-slate-200'
             }`}
           aria-label="Toggle Theme"
         >

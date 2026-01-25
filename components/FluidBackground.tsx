@@ -151,25 +151,25 @@ export const FluidBackground: React.FC = () => {
              60% { stop-color: #0c4a6e; }      /* Sky-900 */
         }
 
-        /* --- LIGHT MODE PALETTE (Clean Day) --- */
-        /* Strategy: Cool Gray -> Silver -> Pale Blue. Never too saturated. */
+        /* --- LIGHT MODE PALETTE (Clean Day - Pro Max) --- */
+        /* Design: Very subtle, almost white shifts to maintain "Clean Paper" aesthetic */
         
         @keyframes colorShift1_light {
-            0%, 100% { stop-color: #94a3b8; } /* Slate-400 */
-            30% { stop-color: #cbd5e1; }      /* Slate-300 */
-            60% { stop-color: #64748b; }      /* Slate-500 */
+            0%, 100% { stop-color: #f1f5f9; } /* Slate-100 */
+            30% { stop-color: #e2e8f0; }      /* Slate-200 */
+            60% { stop-color: #cbd5e1; }      /* Slate-300 */
         }
         
         @keyframes colorShift2_light {
-            0%, 100% { stop-color: #bae6fd; } /* Sky-200 */
+            0%, 100% { stop-color: #f0f9ff; } /* Sky-50 */
             30% { stop-color: #e0f2fe; }      /* Sky-100 */
-            60% { stop-color: #7dd3fc; }      /* Sky-300 */
+            60% { stop-color: #bae6fd; }      /* Sky-200 */
         }
         
         @keyframes colorShift3_light {
-             0%, 100% { stop-color: #a5f3fc; } /* Cyan-200 */
-             30% { stop-color: #cffafe; }      /* Cyan-100 */
-             60% { stop-color: #67e8f9; }      /* Cyan-300 */
+             0%, 100% { stop-color: #f8fafc; } /* Slate-50 */
+             30% { stop-color: #f1f5f9; }      /* Slate-100 */
+             60% { stop-color: #e0f2fe; }      /* Sky-100 */
         }
       `}</style>
     </div>
