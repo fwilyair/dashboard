@@ -1,34 +1,52 @@
-# 地服公司两场生产运行态势 (Dual Airport Command Dashboard v1.1)
+# 地服公司两场生产运行态势 (Dual Airport Command Dashboard v1.2)
 
-专为双机场联合运行指挥设计的下一代态势感知大屏。本项目强调高性能渲染、"深空科技 (Deep Tech)" 美学以及响应式数据可视化。
+专为双机场联合运行指挥设计的下一代态势感知大屏。本项目采用现代化的可视化技术，强调高性能渲染以及“幽灵态深空科技 (Ghostly Deep Tech)”美学风格。
 
 ![Dashboard Preview](./screenshot.png)
 *(此处可替换为项目截图)*
 
-## 🎨 视觉风格: 幽灵态深空山峦 (Ghostly Animated Deep Tech Hills)
+## 🎨 视觉风格: 幽灵态深空 (Ghostly Deep Tech)
 
-v1.1 版本引入以此全新的视觉系统，打造沉浸式指挥体验：
+v1.2 版本进一步优化了视觉系统，旨在打造沉浸式且冷静的指挥中心体验：
 
-- **色调 (Palette)**: 严格控制的 **冷色调单色系** (Slate / Indigo / Blue)，营造冷静、专业的指挥中心氛围。
-- **背景系统 (Background System)**:
-  - **实心堆叠 SVG (Solid Stacked SVG)**: 摒弃传统渐变，采用分层明确的实心几何山峦。
-  - **幽灵透明度 (Ghostly Opacity)**: 整体层级控制在 ~20% 透明度并叠加全局暗色遮罩，呈现出如雷达余辉般的隐约质感。
-  - **有机律动 (Organic Motion)**: 每一层山峦都拥有独立的 `swell` (呼吸起伏) 动画 (10s-15s 周期) 和 `feathered` (8px 羽化) 边缘。
-  - **颜色流变 (Color Shifting)**: 背景颜色会在深空光谱 (深岩灰 -> 靛蓝 -> 紫罗兰 -> 暗青) 间以 30s-60s 的周期缓慢循环，确保画面生生不息。
-  - **全屏覆盖 (Full Coverage)**: 最底层引入动态基底，确保无论屏幕比例如何，背景永远100%覆盖无死角。
+- **色调 (Palette)**: 严格控制的冷色调单色系 (Slate / Indigo / Blue / Emerald)，营造专业且高对比度的阅读环境。
+- **动态数字**: 关键指标采用 Rajdhani 科技字体，支持数字呼吸灯效果（Breathe Animation）以及极端值自动高亮。
+- **液态转场 (Liquid Transitions)**: 页面切换伴随 1500ms 的平滑淡入淡出效果，确保视觉传达的连续性。
+- **自适应布局**: 全局采用 Flexbox 与 Grid 混合布局，完美适配超宽屏、4K 指挥大屏及各种常规比例显示器。
+
+## 🚦 看板功能 (Key Features)
+
+项目包含四个核心态势感知页面：
+
+1. **综合运行态势**: 展示 A/B 机场的实时运行统计、始发正常率及两场联合保障情况。
+2. **指标看板 (Indicators)**: 核心业务指标（起飞正常率、关门正常率等）的横向对比，自动追踪并高亮代理间的最高/最低绩效。
+3. **运营看板 (Operations)**: 宏观展示航班架次、旅客吞吐、货邮吞吐的年度目标达成率及进度。
+4. **放行看板 (Release)**: 24小时滚动航班高峰预测，支持计划与实际流量的动态对比。
+
+## ⚙️ 自动化与控制 (Automation)
+
+支持通过 URL 参数控制看板的交互行为：
+
+- **自动翻页**: 默认关闭。
+- **开启方式**:
+  - `?interval=5`: 开启每 5 秒自动循环翻页。
+  - `?auto=true`: 开启翻页（默认 10 秒间隔）。
+- **交互控制**: 支持键盘左右方向键手动切换页面。
 
 ## 🛠️ 技术栈 (Tech Stack)
 
-基于现代高性能前端技术构建：
+基于前沿高性能前端技术栈构建：
 
-- **核心**: [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
-- **构建**: [Vite](https://vitejs.dev/)
-- **样式**: [Tailwind CSS v4](https://tailwindcss.com/)
-- **图标**: [Lucide React](https://lucide.dev/)
-- **图表**: [Recharts](https://recharts.org/)
-- **测试**: [Vitest](https://vitest.dev/) + React Testing Library
+- **核心框架**: [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- **构建工具**: [Vite 7](https://vitejs.dev/)
+- **样式引擎**: [Tailwind CSS v4](https://tailwindcss.com/) (极简实用主义类名管理)
+- **数据可视化**: [Recharts](https://recharts.org/) (经过自定义封装的柱状图/曲线图)
+- **图标系统**: [Lucide React](https://lucide.dev/)
+- **单元测试**: [Vitest](https://vitest.dev/) (配合 React Testing Library 确保 100% 覆盖关键逻辑)
 
 ## 🚀 快速开始
+
+### 开发环境
 
 ```bash
 # 安装依赖
@@ -37,15 +55,26 @@ npm install
 # 启动开发服务器
 npm run dev
 
-# 生产环境构建
+# 运行测试套件
+npm test
+```
+
+### 生产环境
+
+```bash
+# 静态资源构建
 npm run build
+
+# 预览构建产物
+npm run preview
 ```
 
 ## 📂 项目结构
 
-- `components/FluidBackground.tsx`: 动态背景的核心视觉引擎。
-- `components/*Panel.tsx`: 业务数据面板 (A机场, B机场, 联合运行等)。
-- `App.tsx`: 主布局管理器，处理 "液态分页 (Liquid Pagination)" 转场。
+- `/components`: UI 组件库，每个组件包含视图逻辑及对应的 `.spec.tsx` 测试文件。
+- `/lib/utils.ts`: 通用工具函数（如类名合并 `cn`）。
+- `/operationConstants.ts`: 全局业务模拟数据源及格式化逻辑。
+- `ThemeContext.tsx`: 全局深色模式/主题管理上下文。
 
 ---
 *Designed for ultra-wide command center displays.*
