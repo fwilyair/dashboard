@@ -182,6 +182,55 @@ const MatrixCell: React.FC<{
     );
 }
 
+// Row Label Cell Component for Alignment
+const RowLabelCell: React.FC<{
+    label: string;
+    unit: string;
+    isDark: boolean;
+}> = ({ label, unit, isDark }) => {
+    // Structure must MIRROR MatrixCell to ensure alignment
+    // Top Row: Invisible Placeholder matching text-9xl height
+    // Middle Row: VSISIBLE Label
+    // Bottom Row: Invisible Placeholder matching details height
+
+    return (
+        <div className="flex flex-col h-full justify-center px-4">
+            {/* Top Placeholder - Reduced to text-sm to pull label up */}
+            <div className="flex justify-between items-baseline mb-2 opacity-0 pointer-events-none select-none" aria-hidden="true">
+                <div className="flex flex-col items-start gap-1 mb-1">
+                    <span className="text-sm font-bold tech-font tracking-tight leading-none text-transparent">0</span>
+                    <span className="text-2xl font-medium text-transparent">Total</span>
+                </div>
+                <div className="flex items-baseline">
+                    <span className="text-sm font-black tech-font tracking-tight leading-none italic pr-4 text-transparent">
+                        0
+                    </span>
+                </div>
+            </div>
+
+            {/* Middle Row - THE ACTUAL LABEL */}
+            {/* Matches Progress Bar Gap/Margin */}
+            <div className="flex items-baseline justify-end gap-3 mb-2">
+                <span className={`text-5xl font-black text-right ${isDark ? 'text-white' : 'text-slate-700'}`}>
+                    {label}
+                </span>
+                <span className={`text-2xl font-medium text-left w-[80px] ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
+                    {unit}
+                </span>
+            </div>
+
+            {/* Bottom Placeholder */}
+            {/* Matches Details Grid Height */}
+            <div className="grid grid-cols-3 items-end opacity-0 pointer-events-none select-none" aria-hidden="true">
+                <div className="flex flex-col items-start gap-0.5">
+                    <span className="text-4xl font-bold tech-font tracking-tight leading-none text-transparent">0</span>
+                    <span className="text-xl text-transparent">Plan</span>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 export const OperationPanel: React.FC = () => {
     const { isDark } = useTheme();
 
@@ -225,14 +274,7 @@ export const OperationPanel: React.FC = () => {
 
                 {/* --- Row 2: Flights --- */}
                 {/* Removed border-r */}
-                <div className="flex items-baseline justify-end px-4 gap-3">
-                    <span className={`text-5xl font-black text-right ${isDark ? 'text-white' : 'text-slate-700'}`}>
-                        航班架次
-                    </span>
-                    <span className={`text-2xl font-medium text-left w-[80px] ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
-                        {metricUnits.flights}
-                    </span>
-                </div>
+                <RowLabelCell label="航班架次" unit={metricUnits.flights} isDark={isDark} />
                 <MatrixCell metric={OPERATION_DATA.airportA.metrics.flights} type="flights" colorTheme="emerald" />
                 <MatrixCell metric={OPERATION_DATA.airportB.metrics.flights} type="flights" colorTheme="indigo" />
                 <MatrixCell metric={OPERATION_DATA.combined.metrics.flights} type="flights" colorTheme="amber" />
@@ -240,14 +282,7 @@ export const OperationPanel: React.FC = () => {
 
                 {/* --- Row 3: Passengers --- */}
                 {/* Removed border-r */}
-                <div className="flex items-baseline justify-end px-4 gap-3">
-                    <span className={`text-5xl font-black text-right ${isDark ? 'text-white' : 'text-slate-700'}`}>
-                        旅客吞吐量
-                    </span>
-                    <span className={`text-2xl font-medium text-left w-[80px] ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
-                        {metricUnits.passengers}
-                    </span>
-                </div>
+                <RowLabelCell label="旅客吞吐量" unit={metricUnits.passengers} isDark={isDark} />
                 <MatrixCell metric={OPERATION_DATA.airportA.metrics.passengers} type="passengers" colorTheme="emerald" />
                 <MatrixCell metric={OPERATION_DATA.airportB.metrics.passengers} type="passengers" colorTheme="indigo" />
                 <MatrixCell metric={OPERATION_DATA.combined.metrics.passengers} type="passengers" colorTheme="amber" />
@@ -255,14 +290,7 @@ export const OperationPanel: React.FC = () => {
 
                 {/* --- Row 4: Cargo --- */}
                 {/* Removed border-r */}
-                <div className="flex items-baseline justify-end px-4 gap-3">
-                    <span className={`text-5xl font-black text-right ${isDark ? 'text-white' : 'text-slate-700'}`}>
-                        货邮吞吐量
-                    </span>
-                    <span className={`text-2xl font-medium text-left w-[80px] ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
-                        {metricUnits.cargo}
-                    </span>
-                </div>
+                <RowLabelCell label="货邮吞吐量" unit={metricUnits.cargo} isDark={isDark} />
                 <MatrixCell metric={OPERATION_DATA.airportA.metrics.cargo} type="cargo" colorTheme="emerald" />
                 <MatrixCell metric={OPERATION_DATA.airportB.metrics.cargo} type="cargo" colorTheme="indigo" />
                 <MatrixCell metric={OPERATION_DATA.combined.metrics.cargo} type="cargo" colorTheme="amber" />
