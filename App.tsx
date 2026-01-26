@@ -59,9 +59,20 @@ const App: React.FC = () => {
     handlePageTransition((currentPage - 1 + TOTAL_PAGES) % TOTAL_PAGES);
   }, [currentPage, handlePageTransition]);
 
-  // Auto carousel effect - 30 seconds
+  // Auto carousel effect - Controlled by URL parameters
   useEffect(() => {
-    const timer = setInterval(nextPage, 5000);
+    // Parse URL parameters
+    const searchParams = new URLSearchParams(window.location.search);
+    const autoParam = searchParams.get('auto'); // 'true' or 'false', default 'true'
+    const intervalParam = searchParams.get('interval'); // seconds, default 10
+
+    const shouldAutoPlay = autoParam !== 'false'; // Default to true if not specified as false
+    const intervalSeconds = intervalParam ? parseInt(intervalParam, 10) : 10;
+    const intervalMs = (isNaN(intervalSeconds) ? 10 : intervalSeconds) * 1000;
+
+    if (!shouldAutoPlay) return;
+
+    const timer = setInterval(nextPage, intervalMs);
     return () => clearInterval(timer);
   }, [nextPage]);
 
