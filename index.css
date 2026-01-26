@@ -49,3 +49,31 @@
   will-change: transform;
   transform: translateZ(0);
 }
+
+/* Additions from OperationPanel.tsx inline styles */
+@keyframes liquidSurge {
+    0% { background-position: calc(var(--bg-pos) - 3%) 2%; }
+    20% { background-position: calc(var(--bg-pos) + 2%) 5%; }
+    40% { background-position: calc(var(--bg-pos) + 4%) 0%; }
+    60% { background-position: calc(var(--bg-pos) + 1%) -5%; }
+    80% { background-position: calc(var(--bg-pos) - 2%) -2%; }
+    100% { background-position: calc(var(--bg-pos) - 3%) 2%; }
+}
+
+@keyframes progressFlow {
+    0%, 100% { box-shadow: 0 0 8px currentColor, inset -4px 0 8px rgba(255,255,255,0.3); }
+    50% { box-shadow: 0 0 16px currentColor, inset -8px 0 12px rgba(255,255,255,0.5); }
+}
+
+@keyframes liquidInternal {
+    0% { background-position: 10% 10%; }
+    25% { background-position: 90% 30%; }
+    50% { background-position: 20% 80%; }
+    75% { background-position: 80% 60%; }
+    100% { background-position: 10% 10%; }
+}
+
+@keyframes liquidEdge {
+    0%, 100% { border-top-right-radius: 40% 100%; border-bottom-right-radius: 60% 100%; }
+    50% { border-top-right-radius: 60% 100%; border-bottom-right-radius: 40% 100%; }
+}

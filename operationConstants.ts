@@ -205,5 +205,5 @@ const generateHourlyData = (variant: 'A' | 'B'): HourlyFlightData[] => {
     });
 };
 
-export const HOURLY_FLIGHT_DATA_A: HourlyFlightData[] = generateHourlyData('B');
-export const HOURLY_FLIGHT_DATA_B: HourlyFlightData[] = generateHourlyData('A');
+export const HOURLY_FLIGHT_DATA_A: HourlyFlightData[] = generateHourlyData('A');
+export const HOURLY_FLIGHT_DATA_B: HourlyFlightData[] = generateHourlyData('B');

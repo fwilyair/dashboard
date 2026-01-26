@@ -5,7 +5,7 @@ import { JointOpsPanel } from './components/JointOpsPanel';
 import { OperationsPanel } from './components/OperationsPanel';
 import { OperationPanel } from './components/OperationPanel';
 import { ReleasePanel } from './components/ReleasePanel';
-import { FluidBackground } from './components/FluidBackground';
+// import { FluidBackground } from './components/FluidBackground';
 import { AIRPORT_A_DATA, AIRPORT_B_DATA, JOINT_OPS_DATA } from './constants';
 import { OPERATIONS_DATA } from './operationsConstants';
 import { useTheme } from './ThemeContext';
@@ -63,10 +63,12 @@ const App: React.FC = () => {
   useEffect(() => {
     // Parse URL parameters
     const searchParams = new URLSearchParams(window.location.search);
-    const autoParam = searchParams.get('auto'); // 'true' or 'false', default 'true'
-    const intervalParam = searchParams.get('interval'); // seconds, default 10
+    const autoParam = searchParams.get('auto');
+    const intervalParam = searchParams.get('interval');
 
-    const shouldAutoPlay = autoParam !== 'false'; // Default to true if not specified as false
+    // Auto-play is enabled if 'interval' is provided OR 'auto=true' is specified
+    const shouldAutoPlay = intervalParam !== null || autoParam === 'true';
+
     const intervalSeconds = intervalParam ? parseInt(intervalParam, 10) : 10;
     const intervalMs = (isNaN(intervalSeconds) ? 10 : intervalSeconds) * 1000;
 
@@ -170,14 +172,15 @@ const App: React.FC = () => {
                     <button
                       key={index}
                       onClick={() => goToPage(index)}
-                      className={`
-                        relative rounded-full transition-all duration-[1500ms] cubic-bezier(0.25, 0.8, 0.25, 1) cursor-pointer overflow-hidden
-                        ${isActive
-                          ? 'w-8 h-3 bg-gradient-to-br from-sky-400 to-blue-600 shadow-[inset_0_1px_1px_rgba(255,255,255,0.6)] drop-shadow-[0_0_8px_rgba(14,165,233,0.6)]'
-                          : `w-3 h-3 ${isDark ? 'bg-slate-700 hover:bg-slate-600' : 'bg-slate-300 hover:bg-slate-400'} shadow-inner`}
-                      `}
+                      className={cn(
+                        "relative rounded-full transition-all duration-[1500ms] cubic-bezier(0.25, 0.8, 0.25, 1) cursor-pointer overflow-hidden",
+                        isActive
+                          ? "w-8 h-3 bg-gradient-to-br from-sky-400 to-blue-600 shadow-[inset_0_1px_1px_rgba(255,255,255,0.6)] drop-shadow-[0_0_8px_rgba(14,165,233,0.6)]"
+                          : cn("w-3 h-3 shadow-inner", isDark ? "bg-slate-700 hover:bg-slate-600" : "bg-slate-300 hover:bg-slate-400")
+                      )}
                       aria-label={`Switch to page ${index + 1}`}
                     >
+
                       {/* Liquid Glare Effect for Active State */}
                       <div className={`absolute top-[1px] left-[2px] right-[2px] h-[40%] bg-gradient-to-b from-white/80 to-transparent rounded-full opacity-60 transition-opacity duration-300 ${isActive ? 'opacity-60' : 'opacity-0'}`}></div>
                     </button>

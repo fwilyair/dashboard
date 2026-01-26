@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { cn } from '../lib/utils';
 import { OperationsPageData } from '../operationsTypes';
 import { METRIC_LABELS } from '../operationsConstants';
 import { useTheme } from '../ThemeContext';
@@ -40,7 +41,11 @@ const MetricValueCell: React.FC<{
         <div className="flex flex-col items-center justify-end w-full px-2">
             {/* Value Number */}
             <span
-                className={`text-6xl lg:text-7xl font-black tech-font mb-1 leading-none ${textColorClass} ${isDark ? 'drop-shadow-md' : 'drop-shadow-soft'}`}
+                className={cn(
+                    "text-6xl lg:text-7xl font-black tech-font mb-1 leading-none",
+                    textColorClass,
+                    isDark ? "drop-shadow-md" : "drop-shadow-soft"
+                )}
                 style={value === rowMax ? { animation: 'textBreathe 4s ease-in-out infinite', display: 'inline-block' } : {}}
             >
                 {value.toFixed(1)}<span className="text-4xl ml-[2px]">%</span>

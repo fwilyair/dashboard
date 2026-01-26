@@ -1,4 +1,5 @@
 import React from 'react';
+import { cn } from '../lib/utils';
 import { useTheme } from '../ThemeContext';
 import { OPERATION_DATA, formatMetricValue, OperationMetric } from '../operationConstants';
 
@@ -62,24 +63,13 @@ const MatrixCell: React.FC<{
                 {/* Left: Actual Complete */}
                 <div className="flex flex-col items-start gap-1 mb-1">
                     {/* Reduced text-5xl to text-4xl */}
-                    <span className={`text-5xl font-bold tech-font tracking-tight leading-none ${theme.primary}`}>
+                    <span className={cn("text-5xl font-bold tech-font tracking-tight leading-none", theme.primary)}>
                         {formatted.val}
                     </span>
                     <span className={`text-2xl font-medium ${textWhite}`}>累计完成</span>
                 </div>
 
-                <style>
-                    {`
-                        @keyframes liquidSurge {
-                            0% { background-position: calc(var(--bg-pos) - 3%) 2%; }
-                            20% { background-position: calc(var(--bg-pos) + 2%) 5%; }
-                            40% { background-position: calc(var(--bg-pos) + 4%) 0%; }
-                            60% { background-position: calc(var(--bg-pos) + 1%) -5%; }
-                            80% { background-position: calc(var(--bg-pos) - 2%) -2%; }
-                            100% { background-position: calc(var(--bg-pos) - 3%) 2%; }
-                        }
-                    `}
-                </style>
+
                 {/* Right: Year Target with Water Edge Shake Effect */}
                 <div className="flex items-baseline">
                     <span
@@ -110,25 +100,7 @@ const MatrixCell: React.FC<{
             </div>
 
             {/* Progress Bar with percentage inline */}
-            <style>
-                {`
-                  @keyframes progressFlow {
-                    0%, 100% { box-shadow: 0 0 8px currentColor, inset -4px 0 8px rgba(255,255,255,0.3); }
-                    50% { box-shadow: 0 0 16px currentColor, inset -8px 0 12px rgba(255,255,255,0.5); }
-                  }
-                  @keyframes liquidInternal {
-                    0% { background-position: 10% 10%; }
-                    25% { background-position: 90% 30%; }
-                    50% { background-position: 20% 80%; }
-                    75% { background-position: 80% 60%; }
-                    100% { background-position: 10% 10%; }
-                  }
-                  @keyframes liquidEdge {
-                    0%, 100% { border-top-right-radius: 40% 100%; border-bottom-right-radius: 60% 100%; }
-                    50% { border-top-right-radius: 60% 100%; border-bottom-right-radius: 40% 100%; }
-                  }
-                `}
-            </style>
+
             <div className="flex items-start gap-3 mb-2"> {/* Reduced mb-4 to mb-2 */}
                 <div className={`h-2.5 flex-1 rounded-full overflow-hidden ${isDark ? 'bg-slate-600/50' : 'bg-slate-300'}`}> {/* h-3 -> h-2.5 */}
                     <div
