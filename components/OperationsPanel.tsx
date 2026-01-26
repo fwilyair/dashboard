@@ -85,7 +85,7 @@ export const OperationsPanel: React.FC<OperationsPanelProps> = ({ data }) => {
 
                 {/* Header Row */}
                 <div className="flex items-end pb-2 mb-2"> {/* Reduced pb-6 to pb-2 */}
-                    <div className="w-[320px] flex-shrink-0"></div>
+                    <div className="w-[420px] flex-shrink-0"></div>
 
                     {/* A 机场 Header */}
                     <div className="flex-[4] flex flex-col px-6">
@@ -143,9 +143,9 @@ export const OperationsPanel: React.FC<OperationsPanelProps> = ({ data }) => {
                         return (
                             <div key={key} className="flex-1 flex items-end last:border-0 pb-2">
 
-                                {/* Label Column - Changed to White - Right Aligned */}
-                                <div className="w-[320px] flex-shrink-0 pr-10 mb-[2px] text-right">
-                                    <span className={`text-[36px] font-bold tracking-tight whitespace-nowrap ${isDark ? 'text-white' : 'text-slate-800'}`}>
+                                {/* Label Column - Changed to White - Right Aligned - Reduced padding */}
+                                <div className="w-[420px] flex-shrink-0 pr-4 mb-[2px] text-right">
+                                    <span className={`text-[42px] font-bold tracking-tight whitespace-nowrap ${isDark ? 'text-white' : 'text-slate-800'}`}>
                                         {METRIC_LABELS[key]}
                                     </span>
                                 </div>
