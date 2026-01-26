@@ -91,6 +91,8 @@ export const FluidBackground: React.FC = () => {
                 opacity: 1.0,
                 transformOrigin: '50% 100%',
                 filter: 'blur(8px)',
+                willChange: 'transform',
+                transform: 'translateZ(0)',
               }}
             />
           ))}

@@ -7,15 +7,15 @@ export const ReleasePanel: React.FC = () => {
     const { isDark } = useTheme();
 
     return (
-        <div className="w-full h-full flex flex-col px-8 pb-4">
-            {/* 顶部标题 + 图例 */}
-            <div className="text-center mb-4 pt-2 flex-shrink-0">
-                <h2 className={`text-6xl font-black leading-none tracking-wide ${isDark ? 'text-white' : 'text-slate-700'}`}>
+        <div className="w-full h-full flex flex-col px-8 pb-4 relative">
+            {/* Header Block with Title and Aligned Legend */}
+            <div className="relative mb-4 pt-2 flex-shrink-0">
+                <h2 className={`text-6xl font-black leading-none tracking-wide text-center ${isDark ? 'text-white' : 'text-slate-700'}`}>
                     放行看板
                 </h2>
 
-                {/* Shared Legend */}
-                <div className="flex items-center justify-center gap-8 mt-4 text-sm font-bold">
+                {/* Legend - Bottom Aligned to Title */}
+                <div className="absolute right-0 bottom-1.5 flex items-center gap-6 text-sm font-bold z-20">
                     <div className="flex items-center gap-2">
                         <div className="w-3 h-3 rounded-full bg-blue-500"></div>
                         <span className={`${isDark ? 'text-white' : 'text-blue-600'}`}>计划离港</span>

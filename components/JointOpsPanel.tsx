@@ -87,10 +87,7 @@ export const JointOpsPanel: React.FC<JointOpsPanelProps> = ({ data }) => {
           {data.gaps.map((gap, index) => (
             <div
               key={index}
-              className={`flex items-center justify-between border-b py-5 last:border-0 rounded-lg px-2 ${isDark
-                ? 'border-white/5'
-                : 'border-slate-200/60'
-                }`}
+              className={`flex items-center justify-between py-5 rounded-lg px-2`}
             >
               {/* Label Section - aligned with numbers baseline */}
               <div className="flex-shrink-0 flex items-center">

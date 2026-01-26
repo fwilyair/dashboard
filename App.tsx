@@ -13,7 +13,7 @@ import { useTheme } from './ThemeContext';
 const CAROUSEL_INTERVAL = 10000; // 10 seconds
 const TOTAL_PAGES = 4;
 
-import { ResponsiveWrapper } from './components/ResponsiveWrapper';
+// import { ResponsiveWrapper } from './components/ResponsiveWrapper';
 import { cn } from './lib/utils';
 
 const App: React.FC = () => {
@@ -32,17 +32,17 @@ const App: React.FC = () => {
     setIsTransitioning(true);
     setTransitionStage('in');
 
-    // Wait for cover (800ms match CSS)
+    // Wait for cover (1500ms match CSS)
     setTimeout(() => {
       setCurrentPage(targetPage);
       setTransitionStage('out');
 
-      // Wait for reveal (800ms match CSS)
+      // Wait for reveal (1500ms match CSS)
       setTimeout(() => {
         setTransitionStage('idle');
         setIsTransitioning(false);
-      }, 800);
-    }, 800);
+      }, 1500);
+    }, 1500);
   }, [currentPage, isTransitioning]);
 
   // Navigate to specific page
@@ -84,14 +84,17 @@ const App: React.FC = () => {
   const SHOW_CONTENT = true;
 
   return (
-    <ResponsiveWrapper>
+    // <ResponsiveWrapper>
+    <div className="w-screen h-screen overflow-hidden bg-[#0f172a]">
       <div className={cn(
         "w-full h-full flex flex-col relative overflow-hidden",
         isDark ? 'text-white' : 'text-slate-700'
       )}>
 
         {/* Dynamic Background (Persistent - Outside Transition) */}
-        <FluidBackground />
+        {/* Dynamic Background (Persistent - Outside Transition) */}
+        {/* <FluidBackground /> */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 to-[#020617] z-0" />
 
         {SHOW_CONTENT && (
           <>
@@ -100,7 +103,7 @@ const App: React.FC = () => {
 
             {/* Main Dashboard Content - Applies Fade Transition HERE */}
             <main
-              className="w-full h-full p-3 pb-4 relative z-10 flex-1 overflow-hidden flex flex-col transition-opacity duration-[800ms] ease-in-out"
+              className="w-full h-full p-3 pb-4 relative z-10 flex-1 overflow-hidden flex flex-col transition-opacity duration-[1500ms] ease-in-out"
               style={{
                 opacity: transitionStage === 'in' ? 0 : 1,
               }}
@@ -142,41 +145,43 @@ const App: React.FC = () => {
                 </div>
               )}
 
-              {/* Bottom Alignment Decoration Line */}
-              <div className={`w-full h-[2px] mt-2 bg-gradient-to-r from-transparent to-transparent shrink-0 ${isDark ? 'via-slate-600 opacity-50' : 'via-slate-300 opacity-60'}`}></div>
+            </main>
 
-              {/* Page Indicator - Liquid Glass Style (No Background) */}
-              <div className="flex justify-center items-center mt-3 mb-1">
-                <div className="flex items-center gap-4 px-6 py-3 rounded-full transition-all duration-500">
-                  {[0, 1, 2, 3].map((index) => (
+            {/* Bottom Alignment Decoration Line */}
+
+
+            {/* Page Indicator - Liquid Glass Style (No Background) */}
+            <div className="flex justify-center items-center mt-3 mb-1">
+              <div className="flex items-center gap-4 px-6 py-3 rounded-full transition-all duration-500">
+                {[0, 1, 2, 3].map((index) => {
+                  const isActive = currentPage === index;
+                  return (
                     <button
                       key={index}
                       onClick={() => goToPage(index)}
                       className={`
-                      relative rounded-full transition-all duration-[1500ms] cubic-bezier(0.25, 0.8, 0.25, 1) cursor-pointer overflow-hidden
-                      ${currentPage === index
+                        relative rounded-full transition-all duration-[1500ms] cubic-bezier(0.25, 0.8, 0.25, 1) cursor-pointer overflow-hidden
+                        ${isActive
                           ? 'w-8 h-3 bg-gradient-to-br from-sky-400 to-blue-600 shadow-[inset_0_1px_1px_rgba(255,255,255,0.6)] drop-shadow-[0_0_8px_rgba(14,165,233,0.6)]'
-                          : `w-3 h-3 hover:scale-125 ${isDark ? 'bg-white/20 hover:bg-white/40' : 'bg-slate-400/30 hover:bg-slate-400/50'}`
-                        }
-                    `}
+                          : `w-3 h-3 ${isDark ? 'bg-slate-700 hover:bg-slate-600' : 'bg-slate-300 hover:bg-slate-400'} shadow-inner`}
+                      `}
                       aria-label={`Switch to page ${index + 1}`}
                     >
                       {/* Liquid Glare Effect for Active State */}
-                      {currentPage === index && (
-                        <div className="absolute top-[1px] left-[2px] right-[2px] h-[40%] bg-gradient-to-b from-white/80 to-transparent rounded-full opacity-60"></div>
-                      )}
+                      <div className={`absolute top-[1px] left-[2px] right-[2px] h-[40%] bg-gradient-to-b from-white/80 to-transparent rounded-full opacity-60 transition-opacity duration-300 ${isActive ? 'opacity-60' : 'opacity-0'}`}></div>
                     </button>
-                  ))}
-                </div>
-                <span className={`ml-4 text-xs font-medium ${isDark ? 'text-slate-500' : 'text-slate-400'} hidden`}>
-                  ← → 键盘切换
-                </span>
+                  );
+                })}
               </div>
-            </main>
+              <span className={`ml-4 text-xs font-medium ${isDark ? 'text-slate-500' : 'text-slate-400'} hidden`}>
+                ← → 键盘切换
+              </span>
+            </div>
           </>
         )}
       </div>
-    </ResponsiveWrapper>
+    </div>
+    // </ResponsiveWrapper>
   );
 };
 

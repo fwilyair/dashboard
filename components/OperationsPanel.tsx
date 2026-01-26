@@ -40,42 +40,13 @@ const MetricValueCell: React.FC<{
         <div className="flex flex-col items-center justify-end w-full px-2">
             {/* Value Number */}
             <span
-                className={`text-5xl lg:text-6xl font-black tech-font mb-1 leading-none ${textColorClass} ${isDark ? 'drop-shadow-md' : 'drop-shadow-soft'}`}
+                className={`text-6xl lg:text-7xl font-black tech-font mb-1 leading-none ${textColorClass} ${isDark ? 'drop-shadow-md' : 'drop-shadow-soft'}`}
                 style={value === rowMax ? { animation: 'textBreathe 4s ease-in-out infinite', display: 'inline-block' } : {}}
             >
-                {value.toFixed(1)}<span className="text-3xl ml-[1px]">%</span>
+                {value.toFixed(1)}<span className="text-4xl ml-[2px]">%</span>
             </span>
 
-            {/* Progress Bar */}
-            <style>
-                {`
-                  @keyframes progressFlow {
-                    0%, 100% { box-shadow: 0 0 6px currentColor, inset -3px 0 6px rgba(255,255,255,0.3); }
-                    50% { box-shadow: 0 0 12px currentColor, inset -6px 0 10px rgba(255,255,255,0.5); }
-                  }
-                  @keyframes liquidInternal {
-                    0% { background-position: 10% 10%; }
-                    25% { background-position: 90% 30%; }
-                    50% { background-position: 20% 80%; }
-                    75% { background-position: 80% 60%; }
-                    100% { background-position: 10% 10%; }
-                  }
-                  @keyframes liquidEdge {
-                    0%, 100% { border-top-right-radius: 40% 100%; border-bottom-right-radius: 60% 100%; }
-                    50% { border-top-right-radius: 60% 100%; border-bottom-right-radius: 40% 100%; }
-                  }
-                `}
-            </style>
-            <div className={`w-full h-1.5 rounded-full overflow-hidden ${isDark ? 'bg-slate-600/50' : 'bg-slate-300'}`}>
-                <div
-                    className={`h-full rounded-l-full bg-gradient-to-r ${barGradient}`}
-                    style={{
-                        width: `${value}%`,
-                        backgroundSize: '400% 400%',
-                        animation: isDark ? 'progressFlow 2s ease-in-out infinite, liquidInternal 10s ease-in-out infinite, liquidEdge 3s ease-in-out infinite' : undefined
-                    }}
-                />
-            </div>
+
         </div>
     );
 };
@@ -113,7 +84,7 @@ export const OperationsPanel: React.FC<OperationsPanelProps> = ({ data }) => {
             <div className="flex-1 min-h-0 flex flex-col pb-4">
 
                 {/* Header Row */}
-                <div className="flex items-end pb-2 border-b border-white/10 mb-2"> {/* Reduced pb-6 to pb-2 */}
+                <div className="flex items-end pb-2 mb-2"> {/* Reduced pb-6 to pb-2 */}
                     <div className="w-[320px] flex-shrink-0"></div>
 
                     {/* A 机场 Header */}
@@ -136,8 +107,7 @@ export const OperationsPanel: React.FC<OperationsPanelProps> = ({ data }) => {
                         </div>
                     </div>
 
-                    {/* Vertical Divider */}
-                    <div className={`w-px h-24 mx-4 ${isDark ? 'bg-white/10' : 'bg-slate-300'}`}></div>
+
 
                     {/* B 机场 Header */}
                     <div className="flex-[1.5] flex flex-col px-6">
@@ -171,7 +141,7 @@ export const OperationsPanel: React.FC<OperationsPanelProps> = ({ data }) => {
                         const rowMin = Math.min(...rowVals);
 
                         return (
-                            <div key={key} className="flex-1 flex items-end border-b border-white/5 last:border-0 pb-2">
+                            <div key={key} className="flex-1 flex items-end last:border-0 pb-2">
 
                                 {/* Label Column - Changed to White - Right Aligned */}
                                 <div className="w-[320px] flex-shrink-0 pr-10 mb-[2px] text-right">
@@ -195,8 +165,7 @@ export const OperationsPanel: React.FC<OperationsPanelProps> = ({ data }) => {
                                     ))}
                                 </div>
 
-                                {/* Vertical Divider */}
-                                <div className={`w-px h-16 mx-4 mb-2 ${isDark ? 'bg-white/10' : 'bg-slate-300'}`}></div>
+
 
                                 {/* B 机场 Data */}
                                 <div className="flex-[1.5] flex justify-center items-end gap-4 px-6">

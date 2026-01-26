@@ -62,7 +62,7 @@ export const AirportPanel: React.FC<AirportPanelProps> = ({ data, children }) =>
         `}
       </style>
       <div className="flex flex-col gap-6 flex-shrink-0">
-        <div className={`flex items-center gap-4 border-b pb-4 ${isAirportA ? 'justify-end' : 'justify-start'} ${isDark ? 'border-white/10' : 'border-slate-200/60'}`}>
+        <div className={`flex items-center gap-4 pb-4 ${isAirportA ? 'justify-end' : 'justify-start'}`}>
           <div className={`order-first w-2 h-10 rounded-full ${isTeal ? 'bg-emerald-500' : 'bg-indigo-500'}`}></div>
           <div className={isAirportA ? 'text-right' : 'text-left'}>
             <h2 className={`text-[48px] font-black tracking-tight ${isDark ? 'text-white drop-shadow-md' : 'text-slate-700 drop-shadow-soft'}`}>{data.name}</h2> {/* Explicit 48px */}
@@ -119,7 +119,7 @@ export const AirportPanel: React.FC<AirportPanelProps> = ({ data, children }) =>
         <SmallStatCard data={data.metrics.intCgo} colorTheme={data.colorTheme} align={isAirportA ? 'right' : 'left'} />
       </div>
 
-      <div className={`mt-auto flex-shrink-0 pt-8 border-t ${children ? (isDark ? 'border-white/10' : 'border-slate-200/60') : 'border-transparent'}`}>
+      <div className={`mt-auto flex-shrink-0 pt-8 border-transparent`}>
         {children ? (
           children
         ) : (

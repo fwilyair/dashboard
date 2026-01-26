@@ -44,7 +44,7 @@ export const HourlyFlightChart: React.FC<HourlyFlightChartProps> = ({
     // Dimensions
     const width = 1200;
     const height = 300;
-    const padding = { top: 20, bottom: 20, left: 40, right: 40 };
+    const padding = { top: 30, bottom: 30, left: 40, right: 40 };
     const chartHeight = height - padding.top - padding.bottom;
     const midY = chartHeight / 2 + padding.top;
     // Upper section (Dep) height = chartHeight / 2
@@ -58,7 +58,7 @@ export const HourlyFlightChart: React.FC<HourlyFlightChartProps> = ({
             max = Math.max(max, d.depActual, d.depPlanned, d.arrActual, d.arrPlanned);
         });
         // Add buffer
-        return Math.max(max * 1.2, 10);
+        return Math.max(max * 1.15, 10);
     }, [data]);
 
     // Scales
@@ -102,8 +102,8 @@ export const HourlyFlightChart: React.FC<HourlyFlightChartProps> = ({
         return d;
     };
 
-    const renderTitleBar = () => (
-        <div className={`flex items-center gap-4 ${titlePosition === 'top' ? 'mb-2' : 'mt-2'}`}>
+    const renderTitleBar = (customClass: string = '') => (
+        <div className={`flex items-center gap-4 ${customClass}`}>
             {/* Vertical Stripe - Same style as AirportPanel */}
             <div className={`w-2 h-10 rounded-full ${colorTheme === 'teal' ? 'bg-emerald-500' : 'bg-indigo-500'}`}></div>
 
@@ -120,11 +120,11 @@ export const HourlyFlightChart: React.FC<HourlyFlightChartProps> = ({
     );
 
     return (
-        <div className={`w-full h-full flex flex-col ${className}`}>
-            {titlePosition === 'top' && renderTitleBar()}
+        <div className={`w-full h-full relative ${className}`}>
+            {renderTitleBar(`absolute left-0 z-10 ${titlePosition === 'top' ? 'top-0' : 'bottom-0'}`)}
 
             {/* Chart Container */}
-            <div className="relative flex-1 w-full min-h-0">
+            <div className="absolute inset-0 w-full h-full min-h-0">
                 <svg viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="none" className="w-full h-full block">
                     {/* Definitions for Gradients/Filters */}
                     <defs>
@@ -370,7 +370,7 @@ export const HourlyFlightChart: React.FC<HourlyFlightChartProps> = ({
                 </svg>
             </div >
 
-            {titlePosition === 'bottom' && renderTitleBar()}
+
         </div >
     );
 };
